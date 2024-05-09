@@ -1,0 +1,14 @@
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\bin\Debug\Tubes3_BesokMinggu.exe.config
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\bin\Debug\Tubes3_BesokMinggu.exe
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\bin\Debug\Tubes3_BesokMinggu.pdb
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.csproj.AssemblyReference.cache
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\MainWindow.baml
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\MainWindow.g.cs
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\App.g.cs
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu_MarkupCompile.cache
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.g.resources
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.Properties.Resources.resources
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.csproj.GenerateResource.cache
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.csproj.CoreCompileInputs.cache
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.exe
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\Tubes3_BesokMinggu.pdb
