@@ -1,6 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Tubes3_BesokMinggu
 {
@@ -9,9 +20,14 @@ namespace Tubes3_BesokMinggu
     /// </summary>
     public partial class MainWindow
     {
+        
+        public ResultData ResultData { get; set; }
+        
         public MainWindow()
         {
             InitializeComponent();
+            ResultData = new ResultData();
+            this.DataContext = ResultData;
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tubes3_BesokMinggu", "Tubes3_BesokMinggu\Tubes3_BesokMinggu.csproj", "{00119B2C-E632-4B11-AEB4-B7994CF96977}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tubes3_BesokMinggu", "Tubes3_BesokMinggu\Tubes3_BesokMinggu.csproj", "{F34BD270-5009-444E-B02E-E8301FF0A0D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tubes3_BesokMinggu.Tests", "Tubes3_BesokMinggu.Tests\Tubes3_BesokMinggu.Tests.csproj", "{0E8DDC36-C5CB-4969-B527-C5012B594755}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00119B2C-E632-4B11-AEB4-B7994CF96977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00119B2C-E632-4B11-AEB4-B7994CF96977}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00119B2C-E632-4B11-AEB4-B7994CF96977}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00119B2C-E632-4B11-AEB4-B7994CF96977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F34BD270-5009-444E-B02E-E8301FF0A0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34BD270-5009-444E-B02E-E8301FF0A0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34BD270-5009-444E-B02E-E8301FF0A0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34BD270-5009-444E-B02E-E8301FF0A0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8DDC36-C5CB-4969-B527-C5012B594755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8DDC36-C5CB-4969-B527-C5012B594755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8DDC36-C5CB-4969-B527-C5012B594755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8DDC36-C5CB-4969-B527-C5012B594755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

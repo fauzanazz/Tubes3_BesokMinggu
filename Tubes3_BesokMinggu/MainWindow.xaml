@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tubes3_BesokMinggu"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1024">
+        Title="MainWindow" Height="740" Width="1024">
     <Grid Margin="10">
         
         <Grid.RowDefinitions>
@@ -40,7 +41,12 @@
                 </Grid>
                 
                 <Grid Grid.Column="2">
-                    <TextBlock Name="ResultText" Text="Result" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <StackPanel>
+                        <TextBlock Text="NIK = " />
+                        <TextBlock Text="{Binding NIK}" />
+                        <TextBlock Text="Tempat Lahir = " />
+                        <TextBlock Text="{Binding TempatLahir}" />
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
@@ -64,7 +70,7 @@
                 </Grid>
                 
                 <Grid Grid.Column="2">
-                    <Button Name="ProcessButton" Click="ProcessButton_Click">Process</Button>
+                    <TextBlock Name="ResultText" Text="Hai"/>
                 </Grid>
                 
                 <Grid Grid.Column="3">
