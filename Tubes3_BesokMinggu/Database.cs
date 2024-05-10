@@ -17,13 +17,6 @@ namespace Tubes3_BesokMinggu
             Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;")
-                .LogTo(Console.WriteLine, LogLevel.Information);
-        }
-
         public List<string> GetResultData()
         {
             return ResultData.Select(x => x.NIK).ToList();

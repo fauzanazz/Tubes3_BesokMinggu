@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using AForge.Imaging;
 using AForge.Imaging.Filters;
-using AForge.Imaging.Textures;
-using Image = AForge.Imaging.Image;
 
 namespace Tubes3_BesokMinggu;
 
@@ -12,83 +9,139 @@ public static class Solver
 {
     public static int SolveKMP(string text, string pattern)
     {
-        int number =  Algorithm.KMPSearch(text, pattern);
-        if (number == -1)
-        {
-            return 0;
-        }
-        return Algorithm.LevenshteinDistance(text, pattern);
+        var number =  Algorithm.KMPSearch(text, pattern);
+        return number == -1 ? 0 : Algorithm.LevenshteinDistance(text, pattern);
     }
     
     public static int SolveBoyerMoore(string text, string pattern)
     {
-        int number = Algorithm.BoyerMoore(text, pattern);
-        if (number == -1)
-        {
-            return 0;
-        }
-        return Algorithm.LevenshteinDistance(text, pattern);
+        var number = Algorithm.BoyerMoore(text, pattern);
+        return number == -1 ? 0 : Algorithm.LevenshteinDistance(text, pattern);
     }
 
-    public static byte[] FileToProcessing(string filePath)
+    public static Bitmap ProcessImage(String path)
     {
-        // Load the BMP
-        Bitmap image = (Bitmap)Image.FromFile(filePath);
+        // Load an image from file
+        Bitmap image = new Bitmap(path);
         
-        // Apply the texture filter to the image
-        Texturer texturer = new Texturer(new TextileTexture(), 1.0, 0.5);
-        Bitmap textureImage = texturer.Apply(image);
-    
-        // Apply the threshold filter to the image
-        Threshold thresholdFilter = new Threshold(127);
-        Bitmap thresholdImage = thresholdFilter.Apply(textureImage);
-    
-        // Apply the edge filter to the image
-        SobelEdgeDetector edgeFilter = new SobelEdgeDetector();
-        Bitmap edgeImage = edgeFilter.Apply(thresholdImage);
-    
-        // Apply the hough line transform to the image
-        HoughLineTransformation lineTransform = new HoughLineTransformation();
-        lineTransform.ProcessImage(edgeImage);
-    
-        // Get the lines from the hough line transform
-        HoughLine[] lines = lineTransform.GetLinesByRelativeIntensity(0.5);
-    
-        // Draw the lines on the image
-        BitmapData data = edgeImage.LockBits(new Rectangle(0, 0, edgeImage.Width, edgeImage.Height), ImageLockMode.ReadWrite, edgeImage.PixelFormat);
-        for (int i = 0; i < lines.Length - 1; i++)
-        {
-            // Convert the Theta values to IntPoint objects
-            int x1 = (int)(edgeImage.Width / 2 + lines[i].Radius * Math.Cos(lines[i].Theta * Math.PI / 180));
-            int y1 = (int)(edgeImage.Height / 2 + lines[i].Radius * Math.Sin(lines[i].Theta * Math.PI / 180));
-            int x2 = (int)(edgeImage.Width / 2 + lines[i+1].Radius * Math.Cos(lines[i+1].Theta * Math.PI / 180));
-            int y2 = (int)(edgeImage.Height / 2 + lines[i+1].Radius * Math.Sin(lines[i+1].Theta * Math.PI / 180));
+        // Histogram Equalization
+        HistogramEqualization histogramEqualization = new HistogramEqualization();
+        Bitmap equalizedImage = histogramEqualization.Apply(image);
+        
+        // Convert the image to a supported format
+        equalizedImage = ConvertToSupportedFormat(equalizedImage);
+        
+        // Convert the image to grayscale
+        Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
+        Bitmap grayscaled = grayscale.Apply(equalizedImage);
+        
+        // Normalize the pixel values
+        grayscaled = Normalize(grayscaled);
+        
+        // Apply thresholding
+        Threshold threshold = new Threshold(127);
+        threshold.ApplyInPlace(grayscaled);
 
-            AForge.IntPoint start = new AForge.IntPoint(x1, y1);
-            AForge.IntPoint end = new AForge.IntPoint(x2, y2);
-
-            // Draw the line
-            Drawing.Line(data, start, end, Color.White);
-        }
-    
-        edgeImage.UnlockBits(data);
-    
-        // Show the image
-        edgeImage.Save("output.png", ImageFormat.Png);
-        
-        // Convert the image to a byte array
-        byte[] binary = ImageToBinary(edgeImage);
-        
-        return binary;
+        return grayscaled;
     }
 
-    private static byte[] ImageToBinary(Bitmap edgeImage)
+    private static Bitmap CropMiddleImage(Bitmap image)
     {
-        ImageConverter converter = new ImageConverter();
-        return (byte[])converter.ConvertTo(edgeImage, typeof(byte[]));
+        // Get the 36 pixel around the middle
+        int x = image.Width / 2;
+        int y = image.Height / 2;
+        
+        int startX = x - 3;
+        int startY = y - 3;
+        
+        return CropImage(image, startX, startY, 6, 6);
     }
+    public static Bitmap ConvertToSupportedFormat(Bitmap image)
+    {
+        // Create a new Bitmap with a supported pixel format
+        var newImage = new Bitmap(image.Width, image.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
-    public static string BinaryToASCII(byte[] binary)
+        // Draw the old image onto the new Bitmap
+        using var g = Graphics.FromImage(newImage);
+        g.DrawImage(image, 0, 0, image.Width, image.Height);
+
+        return newImage;
+    }
+    private static Bitmap CropImage(Bitmap image, int x, int y, int width, int height)
+    {
+        Rectangle cropRect = new Rectangle(x, y, width, height);
+        Bitmap croppedImage = image.Clone(cropRect, image.PixelFormat);
+        return croppedImage;
+    }
+    public static Bitmap Normalize(Bitmap image)
+    {
+        BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
+
+        // Get the address of the first line.
+        IntPtr ptr = bmpData.Scan0;
+
+        // Declare an array to hold the bytes of the bitmap.
+        int bytes = Math.Abs(bmpData.Stride) * image.Height;
+        byte[] rgbValues = new byte[bytes];
+
+        // Copy the RGB values into the array.
+        System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+        // Find the minimum and maximum pixel values
+        byte minPixelValue = 255;
+        byte maxPixelValue = 0;
+        for (int i = 0; i < rgbValues.Length; i++)
+        {
+            if (rgbValues[i] < minPixelValue)
+                minPixelValue = rgbValues[i];
+            if (rgbValues[i] > maxPixelValue)
+                maxPixelValue = rgbValues[i];
+        }
+
+        // Normalize the pixel values
+        for (int i = 0; i < rgbValues.Length; i++)
+        {
+            rgbValues[i] = (byte)((rgbValues[i] - minPixelValue) * 255 / (maxPixelValue - minPixelValue));
+        }
+
+        // Copy the RGB values back to the bitmap
+        System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
+
+        // Unlock the bits.
+        image.UnlockBits(bmpData);
+        
+        return image;
+    }
+    public static byte[] ImageToByteArray(Bitmap image)
+    {
+        BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
+
+        // Get the address of the first line.
+        IntPtr ptr = bmpData.Scan0;
+
+        // Declare an array to hold the bytes of the bitmap.
+        int bytes = Math.Abs(bmpData.Stride) * image.Height;
+        byte[] rgbValues = new byte[bytes];
+
+        // Copy the RGB values into the array.
+        System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+        // Unlock the bits.
+        image.UnlockBits(bmpData);
+
+        // Apply threshold to convert pixel values to binary (1s and 0s)
+        byte threshold = 127; // You can adjust this value as needed
+        for (int i = 0; i < rgbValues.Length; i++)
+        {
+            rgbValues[i] = rgbValues[i] > threshold ? (byte)1 : (byte)0;
+        }
+        
+        // Save the binary value to file
+        System.IO.File.WriteAllBytes("F:/VsCode/CSharp/Tubes3_BesokMinggu/Tubes3_BesokMinggu/BinaryValue.bin", rgbValues);
+
+        return rgbValues;
+    }
+    private static string BinaryToASCII(byte[] binary)
     {
         return System.Text.Encoding.ASCII.GetString(binary);
     }

@@ -14,11 +14,6 @@ namespace Tubes3_BesokMinggu
         
         public MainWindow()
         {
-            string filePath = "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\input.BMP";
-            byte[] binary = Solver.FileToProcessing(filePath);
-            string ascii = Solver.BinaryToASCII(binary);
-            Console.WriteLine(ascii);
-            
             InitializeComponent();
             ResultData = new ResultData();
         }
@@ -45,11 +40,10 @@ namespace Tubes3_BesokMinggu
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                var text = System.IO.File.ReadAllText(openFileDialog.FileName);
-                ResultText.Text = text;
-            }
+            if (openFileDialog.ShowDialog() != true) return;
+            
+            var text = System.IO.File.ReadAllText(openFileDialog.FileName);
+            ResultText.Text = text;
         }
         
         private void SaveButton_Click(object sender, RoutedEventArgs e)
