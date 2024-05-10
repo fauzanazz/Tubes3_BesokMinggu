@@ -17,6 +17,17 @@ namespace Tubes3_BesokMinggu
         
         public MainWindow()
         {
+            // StringMatching stringMatching = new StringMatching();
+            // string text = "Hello World!";
+            // string result = stringMatching.toBahasaAlay(text);
+            // Console.WriteLine(result);
+            //
+            // string pattern = stringMatching.getBahasaAlayPattern(result);
+            // Console.WriteLine(pattern);
+            //
+            // bool isMatch = stringMatching.isMatch(text, pattern);
+            // Console.WriteLine(isMatch);
+            
             InitializeComponent();
             ResultData = new ResultData();
         }

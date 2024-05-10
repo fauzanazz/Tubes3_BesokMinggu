@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Tubes3_BesokMinggu;
 
 [Table("biodata")]
 public class ResultData : INotifyPropertyChanged
 {
+    
+    [Key]
     public string NIK
     {
         get { return NIK; }

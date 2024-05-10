@@ -136,9 +136,6 @@ public static class Solver
             rgbValues[i] = rgbValues[i] > threshold ? (byte)1 : (byte)0;
         }
         
-        // Save the binary value to file
-        System.IO.File.WriteAllBytes("F:/VsCode/CSharp/Tubes3_BesokMinggu/Tubes3_BesokMinggu/BinaryValue.bin", rgbValues);
-
         return rgbValues;
     }
     private static string BinaryToASCII(byte[] binary)

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {}
+    "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {}
   },
   "projects": {
-    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
+    "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "projectUniqueName": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
         "projectName": "Tubes3_BesokMinggu",
-        "projectPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
-        "packagesPath": "C:\\Users\\Ojan\\.nuget\\packages\\",
-        "outputPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
+        "projectPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
+        "outputPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ojan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
@@ -53,6 +53,14 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.18, )"
+            },
+            "System.Collections": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
             }
           },
           "imports": [
@@ -74,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Ojan\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\acer\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
         }
       }
     }
