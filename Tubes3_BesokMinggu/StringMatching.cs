@@ -6,7 +6,7 @@ namespace Tubes3_BesokMinggu;
 
 public class StringMatching
 {
-    public string toBahasaAlay(string text)
+    public static string toBahasaAlay(string text)
     {
         string temp = toBahasaBesarKecil(text);
         temp = toBahasaAngka(temp);
@@ -14,14 +14,14 @@ public class StringMatching
         return temp;
     }
     
-    private string toBahasaBesarKecil(string text)
+    private static string toBahasaBesarKecil(string text)
     {
         Random random = new Random();
         string tempResult = "";
         
         foreach (var c in text)
         {
-            int n = random.Next(0, 1);
+            int n = random.Next(0, 2);
             if (n == 0)
                 tempResult += c.ToString().ToUpper();
             else
@@ -30,7 +30,7 @@ public class StringMatching
         return tempResult;
     }
     
-    private string toBahasaAngka(string text)
+    private static string toBahasaAngka(string text)
     {
         Random random = new Random();
         string tempResult = "";
@@ -54,7 +54,7 @@ public class StringMatching
         
         foreach (var c in text)
         {
-            int n = random.Next(0, 1);
+            int n = random.Next(0, 2);
             if (n == 0 && huruf_angka.ContainsKey(c.ToString()))
                 tempResult += huruf_angka[c.ToString()];
             else
@@ -64,7 +64,7 @@ public class StringMatching
         return tempResult;
     }
     
-    private string toBahasaSingkat(string text)
+    private static string toBahasaSingkat(string text)
     {
         Random random = new Random();
         string tempResult = "";
@@ -72,7 +72,7 @@ public class StringMatching
         
         foreach (var c in text)
         {
-            int n = random.Next(0, 1);
+            int n = random.Next(0, 2);
             // jika n == 0 dan c bukan huruf vokal tambahkan c ke tempResult
             if (n == 0 && !huruf_vokal.Contains(c))
                 tempResult += c.ToString();
@@ -83,7 +83,7 @@ public class StringMatching
         return tempResult;
     }
     
-    public string getBahasaAlayPattern(string text)
+    public static string getBahasaAlayPattern(string text)
     {
         string pattern = getBahasaSingkatPattern(text);
         pattern = getBahasaBesarKecilPattern(pattern);
@@ -91,22 +91,24 @@ public class StringMatching
         return pattern;
     }
     
-    private string getBahasaBesarKecilPattern(string text)
+    private static string getBahasaBesarKecilPattern(string text)
     {
         string pattern = "";
         foreach (var c in text)
         {
-            if (c == ' ')
+            if (char.IsWhiteSpace(c))
                 pattern += "\\s";
             else if (char.IsDigit(c))
                 pattern += c.ToString();
-            else
+            else if (char.IsLetter(c))
                 pattern += "[" + c.ToString().ToLower() + c.ToString().ToUpper() + "]";
+            else
+                pattern += c.ToString();
         }
         return pattern;
     }
     
-    private string getBahasaAngkaPattern(string text)
+    private static string getBahasaAngkaPattern(string text)
     {
         string pattern = "";
         Dictionary<char, string> hurufAngka = new Dictionary<char, string>
@@ -131,7 +133,7 @@ public class StringMatching
         return pattern;
     }
     
-    private string getBahasaSingkatPattern(string text){
+    private static string getBahasaSingkatPattern(string text){
         
         string pattern = "";
         List<char> hurufVokal = new List<char> { 'a', 'i', 'u', 'e', 'o' };
@@ -139,14 +141,15 @@ public class StringMatching
         for (int i = 0; i < text.Length - 1; i++)
         {
             if (!hurufVokal.Contains(text[i]) && !hurufVokal.Contains(text[i + 1]))
-                pattern += text[i] + "[aiueoAIUEO]*";
+                pattern += text[i] + "a*i*u*e*o*";
             else 
                 pattern += text[i];
         }
+        pattern += text[text.Length - 1];
         return pattern;
     }
     
-    public bool isMatch(string text, string pattern)
+    public static bool isMatch(string text, string pattern)
     {
         return System.Text.RegularExpressions.Regex.IsMatch(text, pattern);
     }

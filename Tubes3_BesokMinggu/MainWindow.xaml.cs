@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Tubes3_BesokMinggu;
 
-await using var db = new Database("databases.db");
+// await using var db = new Database();
 
 namespace Tubes3_BesokMinggu
 {
@@ -17,16 +17,24 @@ namespace Tubes3_BesokMinggu
         
         public MainWindow()
         {
-            // StringMatching stringMatching = new StringMatching();
-            // string text = "Hello World!";
-            // string result = stringMatching.toBahasaAlay(text);
-            // Console.WriteLine(result);
-            //
-            // string pattern = stringMatching.getBahasaAlayPattern(result);
-            // Console.WriteLine(pattern);
-            //
-            // bool isMatch = stringMatching.isMatch(text, pattern);
-            // Console.WriteLine(isMatch);
+            string text = "Hello World!";
+            string result = StringMatching.toBahasaAlay(text);
+            Console.WriteLine(result);
+            
+            string pattern = StringMatching.getBahasaAlayPattern(result);
+            
+            bool isMatch = StringMatching.isMatch(text, pattern);
+            Console.WriteLine(isMatch);
+            
+            text = "Masukkan kalimat yang ingin dijadikan Text ALAY disini! John Deanz, Dirja Laksmiwati, Gaiman Winarsih";
+            result = StringMatching.toBahasaAlay(text);
+            Console.WriteLine(result);
+            
+            pattern = StringMatching.getBahasaAlayPattern(result);
+            
+            isMatch = StringMatching.isMatch(text, pattern);
+            Console.WriteLine(isMatch);
+            
             
             InitializeComponent();
             ResultData = new ResultData();
