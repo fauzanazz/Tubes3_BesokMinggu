@@ -13,10 +13,11 @@ namespace Tubes3_BesokMinggu
         
         public DbSet<sidik_jari> sidik_jari { get; set; }
 
-        public Database(string dbPath)
+        public Database()
         {
-            DBPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(),dbPath);
-            // Database.EnsureCreated();
+            // DBPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(),dbPath);
+            DBPath = "databases.db";
+            Database.EnsureCreated();
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,17 +29,26 @@ namespace Tubes3_BesokMinggu
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite($"Data Source={DBPath}");
 
-        public void seedSidikJari()
+        public void seedSidikJari(string folderPath)
         {
             var names = getAllName();
-            // foreach (var name in names)
-            // {
-            //     sidik_jari.Add(new sidik_jari()
-            //     {
-            //         nama = name,
-            //         sidik_jari = "sidik jari"
-            //     });
-            // }
+            Random random = new Random();
+            for (int i =0; i < 600; i++)
+            {
+                string namaAlay = StringMatching.toBahasaAlay(names[random.Next(0, names.Count)]);
+                for (int j = 1; j <= 10; j++)
+                {
+                    sidik_jari.Add(new sidik_jari
+                    {
+                        nama = namaAlay,
+                        berkas_citra = Solver.BinaryToASCII(
+                                            Solver.ImageToByteArray(
+                                                Solver.ProcessImage(folderPath + "fingerprint (" + (i*10 + j).ToString() + ").BMP")
+                                            )
+                                        )
+                    });
+                }
+            }
         }
         
         public List<string> getAllName()

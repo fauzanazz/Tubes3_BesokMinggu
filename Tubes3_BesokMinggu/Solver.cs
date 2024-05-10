@@ -138,7 +138,7 @@ public static class Solver
         
         return rgbValues;
     }
-    private static string BinaryToASCII(byte[] binary)
+    public static string BinaryToASCII(byte[] binary)
     {
         return System.Text.Encoding.ASCII.GetString(binary);
     }
