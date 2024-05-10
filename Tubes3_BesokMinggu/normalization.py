@@ -6,7 +6,7 @@ from tkinter import filedialog
 # global variable
 blockSize = 15
 blockCount = 36
-M0 = 100
+M0 = 50
 VAR0 = 100
 
 def normalization(image):
@@ -28,36 +28,49 @@ def normalization(image):
     for i in range(row):
         for j in range(col):
 
-            if image[i, j] > M:
+            if np.any(image[i, j] > M):
                 G[i, j] = M0 + np.sqrt((VAR0 * (image[i, j] - M) ** 2))
             else:
                 G[i, j] = M0 - np.sqrt((VAR0 * (image[i, j] - M) ** 2))
     return G
 
-def orientation(image):
+def orientation(image, block_size):
     # Calculate gradients gx, gy
     gx, gy = np.gradient(image)
 
-    # Calculate gradient magnitude and direction (in degrees)
-    mag = np.hypot(gx, gy)
-    angle = np.arctan2(gy, gx) * 180 / np.pi
-
     # Create orientation field
-    orientation_field = np.zeros(image.shape)
+    orientation_field = np.zeros_like(image, dtype=np.float64)
+    Vx_array = np.zeros_like(image, dtype=np.float64)
+    Vy_array = np.zeros_like(image, dtype=np.float64)
+    # Iterate over each pixel
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            if mag[i][j] > 50:
-                orientation_field[i][j] = angle[i][j]
-    return orientation_field
+            # Initialize Vx, Vy
+            Vx, Vy = 0, 0
+            
+            # Iterate over the block centered at (i, j)
+            for u in range(i - block_size // 2, i + block_size // 2 + 1):
+                for v in range(j - block_size // 2, j + block_size // 2 + 1):
+                    # Ensure (u, v) is within image bounds
+                    if 0 <= u < image.shape[0] and 0 <= v < image.shape[1]:
+                        # Update Vx, Vy
+                        Vx += 2 * gx[u, v] * gy[u, v]
+                        Vy += gx[u, v] ** 2 * gy[u, v] ** 2
+            
+            # Compute the direction Omega(i, j)
+            orientation_field[i, j] = 0.5 * np.arctan2(Vy, Vx)
+            
+    return orientation_field, Vx_array, Vy_array
 
-def smoothing(image, orientation_field):
+def smoothing(image, orientation_field, P, Vx, Vy):
 
     # Create smoothed image
     smoothed_image = np.zeros(image.shape)
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            if image[i][j] > 50:
-                smoothed_image[i][j] = image[i][j]
+    A = np.zeros(P * P)
+    B = np.zeros(P * P)
+    for i in range(P):
+        for j in range(P):
+            A[i,j] += sum(Vx)
     return smoothed_image
 
 
