@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tubes3_BesokMinggu;
 
+[Table("biodata")]
 public class ResultData : INotifyPropertyChanged
 {
     public string NIK

@@ -19,6 +19,11 @@ namespace Tubes3_BesokMinggu
             Database.EnsureCreated();
         }
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ResultData>().ToTable("biodata");
+        }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite($"Data Source={DBPath}");
     }
