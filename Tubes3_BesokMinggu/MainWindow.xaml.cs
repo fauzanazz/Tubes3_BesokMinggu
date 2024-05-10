@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Tubes3_BesokMinggu;
+
+await using var db = new Database("databases.db");
 
 namespace Tubes3_BesokMinggu
 {

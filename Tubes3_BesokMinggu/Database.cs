@@ -10,21 +10,16 @@ namespace Tubes3_BesokMinggu
     {
         public DbSet<ResultData> ResultData { get; set; }
         public string DBPath { get; private set; }
+        
+        public DbSet<sidik_jari> sidik_jari { get; set; }
 
         public Database(string dbPath)
         {
             DBPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(),dbPath);
             Database.EnsureCreated();
         }
-
-        public List<string> GetResultData()
-        {
-            return ResultData.Select(x => x.NIK).ToList();
-        }
-
-        public string GetDBPath()
-        {
-            return DBPath;
-        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseSqlite($"Data Source={DBPath}");
     }
 }
