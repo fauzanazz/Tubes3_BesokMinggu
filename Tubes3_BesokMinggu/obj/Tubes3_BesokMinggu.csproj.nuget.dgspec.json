@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {}
+    "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {}
   },
   "projects": {
-    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
+    "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "projectUniqueName": "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
         "projectName": "Tubes3_BesokMinggu",
-        "projectPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
-        "packagesPath": "C:\\Users\\Ojan\\.nuget\\packages\\",
-        "outputPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
+        "projectPath": "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "packagesPath": "C:\\Users\\Dave\\.nuget\\packages\\",
+        "outputPath": "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\VisualStudio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Ojan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Dave\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +89,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Ojan\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
