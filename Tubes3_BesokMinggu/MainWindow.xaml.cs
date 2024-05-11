@@ -13,31 +13,15 @@ namespace Tubes3_BesokMinggu
     public partial class MainWindow
     {
         
-        public ResultData ResultData { get; set; }
+        public Biodata Biodata { get; set; }
+        private string _path;
+        private ResultData ResultData { get; set; }
+        
         
         public MainWindow()
         {
-            string text = "Hello World!";
-            string result = StringMatching.toBahasaAlay(text);
-            Console.WriteLine(result);
-            
-            string pattern = StringMatching.getBahasaAlayPattern(result);
-            
-            bool isMatch = StringMatching.isMatch(text, pattern);
-            Console.WriteLine(isMatch);
-            
-            text = "Masukkan kalimat yang ingin dijadikan Text ALAY disini! John Deanz, Dirja Laksmiwati, Gaiman Winarsih";
-            result = StringMatching.toBahasaAlay(text);
-            Console.WriteLine(result);
-            
-            pattern = StringMatching.getBahasaAlayPattern(result);
-            
-            isMatch = StringMatching.isMatch(text, pattern);
-            Console.WriteLine(isMatch);
-            
-            
             InitializeComponent();
-            ResultData = new ResultData();
+            this.DataContext = ResultData;
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -51,21 +35,27 @@ namespace Tubes3_BesokMinggu
             if (openFileDialog.ShowDialog() == true)
             {
                 MyImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                _path = openFileDialog.FileName;
             }
         }
         
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            if (string.IsNullOrEmpty(_path))
             {
-                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            };
+                MessageBox.Show("Please select an image first.");
+                return;
+            }
 
-            if (openFileDialog.ShowDialog() != true) return;
+            ResultData = Solver.SolveBM(_path);
             
-            var text = System.IO.File.ReadAllText(openFileDialog.FileName);
-            ResultText.Text = text;
+            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            {
+                MessageBox.Show("No match found.");
+                return;
+            }
+
+            this.DataContext = ResultData;
         }
         
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -84,7 +74,8 @@ namespace Tubes3_BesokMinggu
         
         private void ProcessButton_Click(object sender, RoutedEventArgs e)
         {
-            ResultText.ClearValue(System.Windows.Controls.TextBox.TextProperty);
+            Database db = new Database();
+            db.seedSidikJari("F:/Real/");
         }
         
         private void ExitButton_Click(object sender, RoutedEventArgs e)

@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj": {}
+    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj": {}
   },
   "projects": {
-    "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj": {
+    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj",
+        "projectUniqueName": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj",
         "projectName": "Tubes3_BesokMinggu.Tests",
-        "projectPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj",
-        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\obj\\",
+        "projectPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\Tubes3_BesokMinggu.Tests.csproj",
+        "packagesPath": "C:\\Users\\Ojan\\.nuget\\packages\\",
+        "outputPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
-          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Ojan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
@@ -27,8 +27,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
-                "projectPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj"
+              "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
+                "projectPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj"
               }
             }
           }
@@ -76,21 +76,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\acer\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Ojan\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
+    "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "projectUniqueName": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
         "projectName": "Tubes3_BesokMinggu",
-        "projectPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
-        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "D:\\VSCODE\\STIMA\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
+        "projectPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+        "packagesPath": "C:\\Users\\Ojan\\.nuget\\packages\\",
+        "outputPath": "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Ojan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
@@ -136,7 +136,7 @@
             },
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.9, )"
+              "version": "[8.0.4, )"
             }
           },
           "imports": [
@@ -158,7 +158,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\acer\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Ojan\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
         }
       }
     }

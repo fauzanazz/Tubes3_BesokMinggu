@@ -138,3 +138,5 @@ D:\VSCODE\STIMA\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\net6.0-windows\T
 D:\VSCODE\STIMA\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\net6.0-windows\Tubes3_BesokMinggu.csproj.CopyComplete
 D:\VSCODE\STIMA\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\net6.0-windows\Tubes3_BesokMinggu.genruntimeconfig.cache
 D:\VSCODE\STIMA\Tubes3_BesokMinggu\Tubes3_BesokMinggu\obj\Debug\net6.0-windows\ref\Tubes3_BesokMinggu.dll
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\bin\Debug\net6.0-windows\Microsoft.Win32.SystemEvents.dll
+F:\VsCode\CSharp\Tubes3_BesokMinggu\Tubes3_BesokMinggu\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll

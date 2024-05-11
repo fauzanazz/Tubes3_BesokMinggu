@@ -1,16 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Documents;
 
 namespace Tubes3_BesokMinggu;
 
 public class StringMatching
 {
+    private static string[] added = Array.Empty<string>();
+    
     public static string toBahasaAlay(string text)
     {
-        string temp = toBahasaBesarKecil(text);
-        temp = toBahasaAngka(temp);
-        temp = toBahasaSingkat(temp);
+        string temp = "";
+        int counter = 0;
+        do
+        {
+            if (counter > 1000)
+                throw new Exception("Not found untill 1000 times");
+
+            temp = toBahasaBesarKecil(text);
+            temp = toBahasaAngka(temp);
+            temp = toBahasaSingkat(temp);
+
+            counter++;
+        } while (added.Contains(temp));
+        added.Append(temp);
         return temp;
     }
     
