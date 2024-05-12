@@ -1,0 +1,62 @@
+.vs
+.venv
+.idea
+# User-specific files
+*.user
+*.userprefs
+*.suo
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.sln.vspscc
+*.vssscc
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.cachefile
+*.VC.db
+*.VC.opendb
+*.VC.VC.opendb
+*.VC.db
+
+# Rider files
+.idea/
+
+# Resharper files
+_ReSharper*/
+
+# Rider
+.idea/
+
+# NuGet
+packages/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

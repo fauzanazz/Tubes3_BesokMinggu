@@ -14,7 +14,7 @@ namespace Tubes3_BesokMinggu
         
         public MainWindow()
         {
-            string filePath = "F:\\VsCode\\CSharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\input.BMP";
+            string filePath = "D:\\ITB\\SEMESTER_4\\STIMA\\Tubes3_Stiima\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\input.BMP";
             byte[] binary = Solver.FileToProcessing(filePath);
             string ascii = Solver.BinaryToASCII(binary);
             Console.WriteLine(ascii);
