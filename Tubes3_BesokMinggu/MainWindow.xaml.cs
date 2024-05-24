@@ -74,8 +74,11 @@ namespace Tubes3_BesokMinggu
         
         private void ProcessButton_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: Processed fingerprint saved in folder processed
             Database db = new Database();
-            db.seedSidikJari("F:/Real/");
+            // TODO: Change the path to dynamic path
+            // db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
+            db.processSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini bisa buat ngeprocess semua sidik jari trus disimpen di folder processed
         }
         
         private void ExitButton_Click(object sender, RoutedEventArgs e)
