@@ -11,7 +11,7 @@ namespace Tubes3_BesokMinggu;
 
 public static class Solver
 {
-    private static int SIZE = 50;
+    private static int SIZE = 64;
     public static Database DB = new Database();
     
     public static ResultData SolveBM(string path)
@@ -263,14 +263,26 @@ public static class Solver
         for (int i = 0; i < rgbValues.Length; i++)
         {
             rgbValues[i] = rgbValues[i] > threshold ? (byte)1 : (byte)0;
-            rgbValues[i] += 70;
+            // rgbValues[i] += 70;
         }
         
         return rgbValues;
     }
     public static string BinaryToASCII(byte[] binary)
     {
-        string ascii = System.Text.Encoding.ASCII.GetString(binary);
+        byte[] binary2 = new byte[(int) Math.Ceiling((double)(binary.Length) / 8)];
+        for (int i = 0; i < binary.Length; i += 8)
+        {
+            byte b = 0;
+            int max = binary.Length - i < 8 ? binary.Length - i : 8;
+            for (int j = 0; j < max; j++)
+            {
+                b <<= 1;
+                b |= binary[i + j];
+            }
+            binary2[i / 8] = b;
+        }
+        string ascii = System.Text.Encoding.ASCII.GetString(binary2);
         return ascii;
     }
     public static string BinaryToString(byte[] binary)
@@ -279,7 +291,7 @@ public static class Solver
         foreach (var VARIABLE in binary)
         {
             strings += VARIABLE.ToString();
-            
+            strings += " ";
         }
         return strings;
     }
