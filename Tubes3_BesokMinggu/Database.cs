@@ -9,6 +9,7 @@ namespace Tubes3_BesokMinggu
 {
     public sealed class Database : DbContext
     {
+        private List<string> processedBinary;
         public DbSet<Biodata> ResultData { get; set; }
         public string DBPath { get; private set; }
         
@@ -24,6 +25,8 @@ namespace Tubes3_BesokMinggu
             }
 
             Database.EnsureCreated();
+
+            processedBinary = new List<string>();
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,8 +41,8 @@ namespace Tubes3_BesokMinggu
         public void seedSidikJari(string folderPath)
         {
             // drop all column if exists
-            // sidik_jari.RemoveRange(sidik_jari);
-            // SaveChanges();
+            sidik_jari.RemoveRange(sidik_jari);
+            SaveChanges();
             try
             {
                 var names = getAllName();
@@ -53,7 +56,7 @@ namespace Tubes3_BesokMinggu
                         sidik_jari.Add(new sidik_jari
                         {
                             nama = namaAlay,
-                            berkas_citra = "fingerprint (" + (i*10 + j) + ").BMP"
+                            berkas_citra = folderPath + "fingerprint (" + (i*10 + j) + ").BMP"
                         });
                     }
                     SaveChanges();
@@ -68,22 +71,14 @@ namespace Tubes3_BesokMinggu
             Console.WriteLine("Seeding sidik_jari table is done.");
         }
         
-        public void processSidikJari(string path)
+        public void SaveToTextProcessedSidikJari(string path)
         {
-            // if path + processed doesn't exist, create dir
-            if (!System.IO.Directory.Exists(path + "processed"))
-            {
-                System.IO.Directory.CreateDirectory(path + "processed");
-            }
-            else
-            {
-                // kalo udah ada folder processed berarti udah pernah di proses imagenya, jadi gaperlu di proses lagi
-                return;
-            }
+            // if file exists, image already processed
+            if (System.IO.File.Exists(path + "fingerprint (1).txt")) return;
 
             for (int i = 0; i < 6000; i++)
             {
-                String temp = Solver.BinaryToASCII(
+                string temp = Solver.BinaryToASCII(
                     Solver.ImageToByteArray(
                         Solver.ProcessImage(path + "fingerprint (" + (i+1) + ").BMP")
                     )
@@ -96,10 +91,10 @@ namespace Tubes3_BesokMinggu
                 }
                 
                 // Save to txt file
-                System.IO.File.WriteAllText(path + "processed\\fingerprint (" + (i+1) + ").txt", temp);
+                System.IO.File.WriteAllText(path + "fingerprint (" + (i+1) + ").txt", temp);
             }
         }
-
+        
         private List<string> getAllName()
         {
             return ResultData.Select(x => x.nama).ToList();

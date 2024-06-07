@@ -192,11 +192,15 @@ public static class Algorithm
      * <param name="t">the second string</param>
      * <returns>the Levenshtein distance between the two strings</returns>
      */
-    public static int LevenshteinDistance(string s, string t)
+    public static int LevenshteinDistance(string s, string t, int length = 100)
     {
+        // Get n char of s and t
+        s = s.Substring((s.Length/2)-length/2, length);
+        t = t.Substring((t.Length/2)-length/2, length);
+        
         // Get the length of the two strings
-        int n = s.Length;
-        int m = t.Length;
+        int m;
+        int n = m = length;
 
         // Initialize a 2D array for dynamic programming
         int[,] dp = new int[n + 1, m + 1];

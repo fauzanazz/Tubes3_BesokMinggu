@@ -13,6 +13,7 @@ namespace Tubes3_BesokMinggu
     public partial class MainWindow
     {
         
+        private Database db = new Database(); // Temporary aja karena tidak tau gmn benerin db yg atas
         public Biodata Biodata { get; set; }
         private string _path;
         private ResultData ResultData { get; set; }
@@ -22,6 +23,8 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
+            // db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
+            db.SaveToTextProcessedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngebuat file txt
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -37,6 +40,7 @@ namespace Tubes3_BesokMinggu
                 MyImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 _path = openFileDialog.FileName;
             }
+
         }
         
         private void LoadButton_Click(object sender, RoutedEventArgs e)
@@ -74,11 +78,6 @@ namespace Tubes3_BesokMinggu
         
         private void ProcessButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Processed fingerprint saved in folder processed
-            Database db = new Database();
-            // TODO: Change the path to dynamic path
-            // db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
-            db.processSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini bisa buat ngeprocess semua sidik jari trus disimpen di folder processed
         }
         
         private void ExitButton_Click(object sender, RoutedEventArgs e)

@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Windows.Shapes;
 using AForge.Imaging.Filters;
+using Rectangle = System.Drawing.Rectangle;
+
 namespace Tubes3_BesokMinggu;
 
 public static class Solver
 {
+    private static int SIZE = 50;
     public static Database DB = new Database();
     
     public static ResultData SolveBM(string path)
@@ -16,31 +21,43 @@ public static class Solver
         // Load the image
         Bitmap image = ProcessImage(path);
         
-        // Crop the middle of the image
-        Bitmap croppedImage = CropMiddleImage(image);
+        // Convert the image to binary
+        byte[] binary = ImageToByteArray(image);
         
-        // Convert the cropped image to binary
-        byte[] binary = ImageToByteArray(croppedImage);
+        // Crop the middle of the binary image
+        byte[] croppedBinary = CropMiddleBinary(binary);
         
         // Convert the binary to ASCII
-        string ascii = BinaryToASCII(binary);
+        string ascii = BinaryToASCII(croppedBinary);
         
         // Make the full binary string for levenshtein distance
         string fullBinary = BinaryToASCII(ImageToByteArray(image));
         
         // Find the closest match in the database
-        var result = DB.sidik_jari
-            .AsEnumerable() // Add this line to switch to client-side evaluation
-            .Select(s => new {s.nama, s.berkas_citra, Distance = SolveBoyerMoore(s.berkas_citra, ascii, fullBinary)}).MaxBy(s => s.Distance);
+        var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
+        foreach (var s in DB.sidik_jari)
+        {
+            var distance = SolveBoyerMoore(s.berkas_citra, ascii, fullBinary);
+            if (distance == 100)
+            {
+                result = new { s.nama, s.berkas_citra, Distance = distance };
+                break;
+            }
+            if (distance > result.Distance)
+            {
+                result = new { s.nama, s.berkas_citra, Distance = distance };
+            }
+        }
         
         // Find the biodata in the database based on the name
+        string regexPattern = StringMatching.getBahasaAlayPattern(result.nama);
         var biodata = DB.ResultData
             .AsEnumerable()
-            .FirstOrDefault(b => StringMatching.isMatch(b.nama,StringMatching.getBahasaAlayPattern(result.nama)));
+            .FirstOrDefault(b => StringMatching.isMatch(b.nama, regexPattern));
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, null, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
     }
     
     public static ResultData SolveKMP(string path)
@@ -50,65 +67,70 @@ public static class Solver
         // Load the image
         Bitmap image = ProcessImage(path);
         
-        // Crop the middle of the image
-        Bitmap croppedImage = CropMiddleImage(image);
+        // Convert the image to binary
+        byte[] binary = ImageToByteArray(image);
         
-        // Convert the cropped image to binary
-        byte[] binary = ImageToByteArray(croppedImage);
+        // Crop the middle of the binary image
+        byte[] croppedBinary = CropMiddleBinary(binary);
         
         // Convert the binary to ASCII
-        string ascii = BinaryToASCII(binary);
+        string ascii = BinaryToASCII(croppedBinary);
         
         // Make the full binary string for levenshtein distance
         string fullBinary = BinaryToASCII(ImageToByteArray(image));
         
         // Find the closest match in the database
-        var result = DB.sidik_jari
-            .AsEnumerable() // Add this line to switch to client-side evaluation
-            .Select(s => new {s.nama, s.berkas_citra, Distance = SolveKMP(s.berkas_citra, ascii, fullBinary )}).MinBy(s => s.Distance);
-        
-        if (result != null && result.Distance < 10)
+        var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
+        foreach (var s in DB.sidik_jari)
         {
-            long ends = DateTime.Now.Ticks;
-            return new ResultData(null, null, (int)((ends - start) / TimeSpan.TicksPerMillisecond), 0);
+            double distance = SolveKMP(s.berkas_citra, ascii, fullBinary);
+            if (distance == 100)
+            {
+                result = new { s.nama, s.berkas_citra, Distance = distance };
+                break;
+            }
+            if (distance > result.Distance)
+            {
+                result = new { s.nama, s.berkas_citra, Distance = distance };
+            }
         }
         
         // Find the biodata in the database based on the name
+        string regexPattern = StringMatching.getBahasaAlayPattern(result.nama);
         var biodata = DB.ResultData
-            .FirstOrDefault(b => StringMatching.isMatch(b.nama,StringMatching.getBahasaAlayPattern(result.nama)));
+            .AsEnumerable()
+            .FirstOrDefault(b => StringMatching.isMatch(b.nama, regexPattern));
         
-        if (biodata == null)
-        {
-            long ended = DateTime.Now.Ticks;
-            return new ResultData(null, null, (int)((ended - start) / TimeSpan.TicksPerMillisecond), 0);
-        }
+        long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        long end = DateTime.Now.Ticks;
-        return new ResultData(biodata, null, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+
     }
 
     private static double SolveKMP(string text, string pattern, string fullPattern)
     {
-        var number =  Algorithm.KMPSearch(text, pattern);
+        // Load txt file named text
+        string texts = System.IO.File.ReadAllText(text.Replace("BMP", "txt"));
+        var number = Algorithm.BoyerMoore(texts, pattern);
         
         if (number == -1) // Jika tidak ditemukan
         {
-            int levenshteinDistance = Algorithm.LevenshteinDistance(text, fullPattern);
-           double similarity = (double)(text.Length - levenshteinDistance) / text.Length;
-           return similarity < 0.0 ? 0 : similarity;
+            int levenshteinDistance = Algorithm.LevenshteinDistance(texts, fullPattern, SIZE);
+            return (SIZE - levenshteinDistance);
         }
         
         return 100;
     }
     private static double SolveBoyerMoore(string text, string pattern, string fullPattern)
     {
-        var number = Algorithm.BoyerMoore(text, pattern);
+        // Load txt file named text
+        string texts = System.IO.File.ReadAllText(text.Replace("BMP", "txt"));
+        var number = Algorithm.BoyerMoore(texts, pattern);
         
         if (number == -1) // Jika tidak ditemukan
         {
-            int levenshteinDistance = Algorithm.LevenshteinDistance(text, fullPattern);
-            double similarity = (double)(text.Length - levenshteinDistance) / text.Length;
-            return similarity < 0.0 ? 0 : similarity;
+            int levenshteinDistance = Algorithm.LevenshteinDistance(texts, fullPattern, SIZE);
+            return (SIZE - levenshteinDistance);
         }
         
         return 100;
@@ -153,16 +175,15 @@ public static class Solver
 
         return grayscaled;
     }
-    private static Bitmap CropMiddleImage(Bitmap image)
+    
+    private static byte[] CropMiddleBinary(byte[] binary)
     {
-        // Get the 36 pixel around the middle
-        int x = image.Width / 2;
-        int y = image.Height / 2;
+        // Get the 50 pixel around the middle
+        int x = binary.Length / 2;
         
-        int startX = x - 3;
-        int startY = y - 3;
+        int startX = x - SIZE/2;
         
-        return CropImage(image, startX, startY, 6, 6);
+        return binary.Skip(startX).Take(SIZE).ToArray();
     }
     private static Bitmap ConvertToSupportedFormat(Bitmap image)
     {
@@ -242,6 +263,7 @@ public static class Solver
         for (int i = 0; i < rgbValues.Length; i++)
         {
             rgbValues[i] = rgbValues[i] > threshold ? (byte)1 : (byte)0;
+            rgbValues[i] += 70;
         }
         
         return rgbValues;
