@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,7 +26,8 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
-            string currentDirectory = Directory.GetCurrentDirectory();
+            
+            
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
         
@@ -41,53 +43,79 @@ namespace Tubes3_BesokMinggu
             {
                 MyImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 MyImage.Stretch = Stretch.Uniform;
+                MyImage.Width = 300;
+                MyImage.Height = 360;
                 
                 _path = openFileDialog.FileName;
             }
 
         }
         
-        private void KMPClick(object sender, RoutedEventArgs e)
+        private async void KMPClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_path))
             {
                 MessageBox.Show("Please select an image first.");
                 return;
             }
-
-            ResultData = Solver.SolveKMP(_path);
+            LoadingBar.Visibility = Visibility.Visible;
+            ResultData = await Task.Run(() => Solver.SolveKMP(_path));
             
-            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            Dispatcher.Invoke(() =>
             {
-                MessageBox.Show("No match found.");
-                return;
-            }
-            OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
-            this.DataContext = ResultData;
+                if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+                {
+                    MessageBox.Show("No match found.");
+                    return;
+                }
+                OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
+                OutputImage.Width = 300;
+                OutputImage.Height = 360;
+                this.DataContext = ResultData;
+                LoadingBar.Visibility = Visibility.Collapsed;
+            });
         }
 
-        private void BoyerMooreClick(object sender, RoutedEventArgs e)
+        private async void BoyerMooreClick(object sender, RoutedEventArgs e)
         {
+            
             if (string.IsNullOrEmpty(_path))
             {
                 MessageBox.Show("Please select an image first.");
                 return;
             }
 
-            ResultData = Solver.SolveBM(_path);
+            LoadingBar.Visibility = Visibility.Visible;
+
+            ResultData = await Task.Run(() => Solver.SolveBM(_path));
             
-            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            Dispatcher.Invoke(() =>
             {
-                MessageBox.Show("No match found.");
-                return;
-            }
-            OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
-            this.DataContext = ResultData;
+                if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+                {
+                    MessageBox.Show("No match found.");
+                    return;
+                }
+                OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
+                OutputImage.Width = 300;
+                OutputImage.Height = 360;
+                DataContext = ResultData;
+                LoadingBar.Visibility = Visibility.Collapsed;
+            });
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private async void RefreshClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            LoadingBar.Visibility = Visibility.Visible;
+            await Task.Run(() =>
+            {
+                string currentDirectory = Directory.GetCurrentDirectory();
+                db.refreshSeed(Path.Combine(currentDirectory, "Dataset"));
+            });
+            Dispatcher.Invoke(() =>
+            {
+                LoadingBar.Visibility = Visibility.Collapsed;
+            });
         }
     }
 }

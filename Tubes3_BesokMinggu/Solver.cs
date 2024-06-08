@@ -69,6 +69,7 @@ public static class Solver
         
         // Load the image
         Bitmap image = ProcessImage(path);
+        image.Save("p.png");
         
         // Convert the image to binary
         byte[] binary = ImageToByteArray(image);

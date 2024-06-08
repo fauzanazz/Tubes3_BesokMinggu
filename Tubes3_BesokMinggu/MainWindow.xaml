@@ -6,126 +6,134 @@
         xmlns:local="clr-namespace:Tubes3_BesokMinggu"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1024">
-        <StackPanel>
-                <Grid Background="#BEBEBE" VerticalAlignment="Top">
-        
-                        <TextBlock FontFamily="Inter" FontSize="40" Padding="0 26 0 26" HorizontalAlignment="Center">
-                                <Bold>Fingerprint Scanner</Bold>
-                        </TextBlock>
+        <Grid>
+                
+                <StackPanel>
+                        <Grid Background="#BEBEBE" VerticalAlignment="Top">
+                
+                                <TextBlock FontFamily="Inter" FontSize="40" Padding="0 26 0 26" HorizontalAlignment="Center">
+                                        <Bold>Fingerprint Scanner</Bold>
+                                </TextBlock>
 
-                        <Button HorizontalAlignment="Right" Margin="25" VerticalAlignment="Center" Background="Transparent">
-                                <Image Source="/UIAsset/RefreshButton.png" Width="50" Height="50"></Image>
-                        </Button>
-                </Grid>
-                <Grid HorizontalAlignment="Stretch" Margin="10 ">
-                        <TextBlock HorizontalAlignment="Center" FontSize="64" FontFamily="Inter" Visibility="Hidden" Name="SimilarityPercentage">
-                                <Bold>100%</Bold>
-                        </TextBlock>
-                </Grid>
-                <GridSplitter Height="10" Background="Transparent"></GridSplitter>
-                <StackPanel HorizontalAlignment="Stretch" Height="380">
-                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="333"/>
-                                        <ColumnDefinition Width="333"/>
-                                        <ColumnDefinition Width="333"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Background="#BEBEBE" Grid.Row="0" Grid.Column="0" Width="300" Height="370" Click="ImageButton_Click">
-                                        <Image Name="MyImage" Source="/UIAsset/PlusButton.png" Width="80" Height="80"/>
+                                <Button HorizontalAlignment="Right" Margin="25" VerticalAlignment="Center" Background="Transparent" Click="RefreshClick">
+                                        <Image Source="/UIAsset/RefreshButton.png" Width="50" Height="50"></Image>
                                 </Button>
-                                <StackPanel Grid.Column="1" Margin="15 27.5">
-                                        <StackPanel.Resources>
-                                                <Style TargetType="TextBlock">
-                                                        <!-- Set FontSize to 16 -->
-                                                        <Setter Property="FontSize" Value="16"/>
-                                                        <!-- Set Padding for each TextBlock -->
-                                                        <Setter Property="Padding" Value="1.5"/>
-                                                        <Setter Property="FontWeight" Value="Medium"></Setter>
-                                                        <Setter Property="FontFamily" Value="Inter"></Setter>
-                                                </Style>
-                                        </StackPanel.Resources>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="NIK = " />
-                                                <TextBlock Text="{Binding Bio.NIK}" />        
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Nama = " />
-                                                <TextBlock Text="{Binding Bio.nama}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Tempat Lahir = " />
-                                                <TextBlock Text="{Binding Bio.tempat_lahir}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Tanggal Lahir = " />
-                                                <TextBlock Text="{Binding Bio.tanggal_lahir}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Jenis Kelamin = " />
-                                                <TextBlock Text="{Binding Bio.jenis_kelamin}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Golongan Darah = " />
-                                                <TextBlock Text="{Binding Bio.golongan_darah}" />
-                                        </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Alamat = " />
-                                                <TextBlock Text="{Binding Bio.alamat}" />
-                                        </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Agama = " />
-                                                <TextBlock Text="{Binding Bio.agama}" />
-                                        </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Jenis Kelamin = " />
-                                                <TextBlock Text="{Binding Bio.jenis_kelamin}" />
-                                        </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Status Perkawinan = " />
-                                                <TextBlock Text="{Binding Bio.status_perkawinan}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Pekerjaan = " />
-                                                <TextBlock Text="{Binding Bio.pekerjaan}" />
-                                        </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Kewarganegaraan = " />
-                                                <TextBlock Text="{Binding Bio.kewarganegaraan}" />
-                                        </StackPanel>
-                                        <GridSplitter Height="25"></GridSplitter>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Time Executed = " />
-                                                <TextBlock Text="{Binding LamaEksekusi}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Similarity = " />
-                                                <TextBlock Text="{Binding Kecocokan}" />
-                                        </StackPanel>
-
-                                       
-                                </StackPanel>
-                                <Label Background="#BEBEBE" Grid.Row="0" Grid.Column="2" Width="300" Height="370" >
-                                        <Image Name="OutputImage" Width="80" Height="80"/>
-                                </Label>
                         </Grid>
+                        <Grid HorizontalAlignment="Stretch" Margin="10 ">
+                                <TextBlock HorizontalAlignment="Center" FontSize="64" FontFamily="Inter" Visibility="Hidden" Name="SimilarityPercentage">
+                                        <Bold>100%</Bold>
+                                </TextBlock>
+                        </Grid>
+                        <GridSplitter Height="10" Background="Transparent"></GridSplitter>
+                        <StackPanel HorizontalAlignment="Stretch" Height="380">
+                                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="333"/>
+                                                <ColumnDefinition Width="333"/>
+                                                <ColumnDefinition Width="333"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Background="#BEBEBE" Grid.Row="0" Grid.Column="0" Width="300" Height="370" Click="ImageButton_Click">
+                                                <Image Name="MyImage" Source="/UIAsset/PlusButton.png" Width="80" Height="80"/>
+                                        </Button>
+                                        <StackPanel Grid.Column="1" Margin="15 27.5">
+                                                <StackPanel.Resources>
+                                                        <Style TargetType="TextBlock">
+                                                                <!-- Set FontSize to 16 -->
+                                                                <Setter Property="FontSize" Value="16"/>
+                                                                <!-- Set Padding for each TextBlock -->
+                                                                <Setter Property="Padding" Value="1.5"/>
+                                                                <Setter Property="FontWeight" Value="Medium"></Setter>
+                                                                <Setter Property="FontFamily" Value="Inter"></Setter>
+                                                        </Style>
+                                                </StackPanel.Resources>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="NIK = " />
+                                                        <TextBlock Text="{Binding Bio.NIK}" />        
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Nama = " />
+                                                        <TextBlock Text="{Binding Bio.nama}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Tempat Lahir = " />
+                                                        <TextBlock Text="{Binding Bio.tempat_lahir}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Tanggal Lahir = " />
+                                                        <TextBlock Text="{Binding Bio.tanggal_lahir}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Jenis Kelamin = " />
+                                                        <TextBlock Text="{Binding Bio.jenis_kelamin}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Golongan Darah = " />
+                                                        <TextBlock Text="{Binding Bio.golongan_darah}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Alamat = " />
+                                                        <TextBlock Text="{Binding Bio.alamat}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Agama = " />
+                                                        <TextBlock Text="{Binding Bio.agama}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Jenis Kelamin = " />
+                                                        <TextBlock Text="{Binding Bio.jenis_kelamin}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Status Perkawinan = " />
+                                                        <TextBlock Text="{Binding Bio.status_perkawinan}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Pekerjaan = " />
+                                                        <TextBlock Text="{Binding Bio.pekerjaan}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Kewarganegaraan = " />
+                                                        <TextBlock Text="{Binding Bio.kewarganegaraan}" />
+                                                </StackPanel>
+                                                <GridSplitter Height="25"></GridSplitter>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Time Executed = " />
+                                                        <TextBlock Text="{Binding LamaEksekusi}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Similarity = " />
+                                                        <TextBlock Text="{Binding Kecocokan}" />
+                                                </StackPanel>
+
+                                               
+                                        </StackPanel>
+                                        <Label Background="#BEBEBE" Grid.Row="0" Grid.Column="2" Width="300" Height="370" >
+                                                <Image Name="OutputImage" Width="80" Height="80"/>
+                                        </Label>
+                                </Grid>
+                        </StackPanel>
+                        <GridSplitter Height="20"></GridSplitter>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock.FontSize>16</TextBlock.FontSize>
+                                
+                                <Button Background="#BEBEBE" Width="120" Height="39" Click="BoyerMooreClick" >
+                                        
+                                        <TextBlock  Text="Boyer Moore"></TextBlock>
+                                </Button>
+                                <GridSplitter Width="30"></GridSplitter>
+                                <Button Background="#BEBEBE" Width="120" Height="39" Click="KMPClick">
+                                        <TextBlock  Text="KMP"></TextBlock>
+                                </Button>
+                        </StackPanel>
                 </StackPanel>
-                <GridSplitter Height="20"></GridSplitter>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="Aqua" >
-                        <TextBlock.FontSize>16</TextBlock.FontSize>
-                        
-                        <Button Background="#BEBEBE" Width="120" Height="39" Click="BoyerMooreClick">
-                                <TextBlock  Text="Boyer Moore"></TextBlock>
-                        </Button>
-                        <GridSplitter Width="30"></GridSplitter>
-                        <Button Background="#BEBEBE" Width="120" Height="39" Click="KMPClick">
-                                <TextBlock  Text="KMP"></TextBlock>
-                        </Button>
-                </StackPanel>
-        </StackPanel>
+                <Grid Name="LoadingBar" Background="#90000000" Visibility="Collapsed">
+                     
+                        <local:LoadingSpinner x:Name="LoadingSpinner" Height="120"  HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" />        
+                </Grid>
+        </Grid>
 </Window>
