@@ -32,9 +32,9 @@
                         </Grid>
                         <StackPanel Name="DataLogging" HorizontalAlignment="Stretch" Margin="0 10 0 0 " Visibility="Collapsed">
                                 <TextBlock HorizontalAlignment="Center" FontSize="48" FontFamily="Inter" >
-                                        <Bold><TextBlock Text="{Binding Kecocokan}" Name="SimilarityPercentage"/></Bold>
+                                        <Bold><TextBlock Name="SimilarityPercentage"/></Bold>
                                 </TextBlock>
-                                <Label Foreground="#F5F5F5" HorizontalAlignment="Center" FontWeight="Medium" FontSize="20">
+                                <Label Foreground="#F5F5F5" HorizontalAlignment="Center" FontWeight="Medium" FontSize="20" Name="TimeExecution">
                                         <TextBlock>
                                                 <Run Text="Process Done in "/>
                                                 <Run Text="{Binding LamaEksekusi}"/> <!-- Assuming you bind to a property called ProcessTime -->
@@ -107,11 +107,6 @@
                                                 </StackPanel>
                                                 
                                                 <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="Jenis Kelamin = " />
-                                                        <TextBlock Text="{Binding Bio.jenis_kelamin}" />
-                                                </StackPanel>
-                                                
-                                                <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="Status Perkawinan = " />
                                                         <TextBlock Text="{Binding Bio.status_perkawinan}" />
                                                 </StackPanel>
@@ -142,7 +137,7 @@
                                 <TextBlock.FontSize>16</TextBlock.FontSize>
                                 <TextBlock.FontWeight>Medium</TextBlock.FontWeight>
                                 
-                                <Button Width="120" Height="45" Click="BoyerMooreClick" BorderThickness="0">
+                                <Button Width="120" Height="45" Click="BoyerMooreClick" BorderThickness="0" Name="BM">
                                         <Button.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Reflect">
                                                         <GradientStop Color="#F5F5F5" Offset="0"/>
@@ -157,7 +152,7 @@
                                         <TextBlock  Text="Boyer Moore"></TextBlock>
                                 </Button>
                                 <GridSplitter Width="30" Background="Transparent"></GridSplitter>
-                                <Button  Width="120" Height="45" Click="KMPClick" BorderThickness="0" >
+                                <Button  Width="120" Height="45" Click="KMPClick" BorderThickness="0" Name="KMP" >
                                         <Button.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Reflect">
                                                         <GradientStop Color="#F5F5F5" Offset="0"/>

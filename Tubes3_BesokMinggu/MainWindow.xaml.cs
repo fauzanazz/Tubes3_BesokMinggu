@@ -3,6 +3,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Tubes3_BesokMinggu;
@@ -27,8 +28,6 @@ namespace Tubes3_BesokMinggu
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = ResultData;
-            
             // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
@@ -66,6 +65,8 @@ namespace Tubes3_BesokMinggu
             Dispatcher.Invoke(() =>
             {
                 HandleResultData(ResultData.Kecocokan);
+                HandleButtonReColor(true, KMP);
+                HandleButtonReColor(false, BM);
             });
         }
 
@@ -84,9 +85,46 @@ namespace Tubes3_BesokMinggu
             Dispatcher.Invoke(() =>
             {
                 HandleResultData(ResultData.Kecocokan);
+                HandleButtonReColor(true, BM);
+                HandleButtonReColor(false, KMP);
             });
         }
 
+        private void HandleButtonReColor(bool isActive, object button)
+        {
+            
+            if (isActive)
+            {
+                LinearGradientBrush gradientBrush = new LinearGradientBrush
+                {
+                    StartPoint = new Point(0, 0),
+                    EndPoint = new Point(1, 1),
+                    SpreadMethod = GradientSpreadMethod.Reflect
+                };
+                
+                gradientBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#44ADF9"), 0)); // White
+                gradientBrush.GradientStops.Add(new GradientStop(Colors.Beige, 1)); // Light gray
+                ((Button)button).Background = gradientBrush;
+                ((Button)button).Foreground = Brushes.Black;
+            }
+            else
+            {
+                LinearGradientBrush gradientBrush = new LinearGradientBrush
+                {
+                    StartPoint = new Point(0, 0),
+                    EndPoint = new Point(1, 1),
+                    SpreadMethod = GradientSpreadMethod.Reflect
+                };
+                
+                gradientBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#F5F5F5"), 0)); // White
+                gradientBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#878787"), 1)); // Light gray
+                ((Button)button).Background = gradientBrush;
+                ((Button)button).Foreground = Brushes.Black;
+                
+            }
+            
+        }
+        
         private async void RefreshClick(object sender, RoutedEventArgs e)
         {
             LoadingBar.Visibility = Visibility.Visible;
@@ -126,17 +164,23 @@ namespace Tubes3_BesokMinggu
         {
             if (similarity < 60)
             {
-                MessageBox.Show("No match found.");
+                SimilarityPercentage.Text = "Match Not Found";
+                SimilarityPercentage.Foreground = Brushes.Red;
+                DataLogging.Visibility = Visibility.Visible;
+                TimeExecution.Visibility = Visibility.Collapsed;
+                OutputImage.Source = null;
+                DataContext = null;
             }
             else
             {
                 OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
                 OutputImage.Width = 300;
                 OutputImage.Height = 360;
-                DataContext = ResultData;
                 SimilarityPercentage.Text = similarity + "%";
                 HandleSimilarityNumber(similarity);
                 DataLogging.Visibility = Visibility.Visible;
+                TimeExecution.Visibility = Visibility.Visible;
+                DataContext = ResultData;
             }
             LoadingBar.Visibility = Visibility.Collapsed;
         }
