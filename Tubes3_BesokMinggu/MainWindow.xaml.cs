@@ -15,6 +15,7 @@ namespace Tubes3_BesokMinggu
     public partial class MainWindow
     {
         
+        private int TRESHOLD = 60;
         private Database db = new Database(); // Temporary aja karena tidak tau gmn benerin db yg atas
         public Biodata Biodata { get; set; }
         private string _path;
@@ -25,6 +26,26 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
+            
+            // test RSA
+            string temp = RSA.encoder("Test Message");
+            string res = RSA.decoder(temp);
+            temp = RSA.encoder("5169441504764349");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("dRj lAK5MiWATi");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("Probolinggo");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("1984-10-03");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("Gg. Siliwangi No. 0");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("Airline pilot");
+            res = RSA.decoder(temp);
+            temp = RSA.encoder("Indonesia");
+            res = RSA.decoder(temp);
+            
+            
             // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
             string currentDirectory = Directory.GetCurrentDirectory();
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
@@ -58,7 +79,7 @@ namespace Tubes3_BesokMinggu
 
             ResultData = Solver.SolveKMP(_path);
             
-            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
             {
                 MessageBox.Show("No match found.");
                 return;
@@ -77,7 +98,7 @@ namespace Tubes3_BesokMinggu
 
             ResultData = Solver.SolveBM(_path);
             
-            if (ResultData.Bio == null || ResultData.Kecocokan < 60)
+            if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
             {
                 MessageBox.Show("No match found.");
                 return;
