@@ -53,10 +53,9 @@ public static class Solver
         }
         
         // Find the biodata in the database based on the name
-        string regexPattern = StringMatching.getBahasaAlayPattern(result.nama);
         var biodata = DB.ResultData
             .AsEnumerable()
-            .FirstOrDefault(b => StringMatching.isMatch(b.nama, regexPattern));
+            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(b.nama)));
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
@@ -103,10 +102,9 @@ public static class Solver
         }
         
         // Find the biodata in the database based on the name
-        string regexPattern = StringMatching.getBahasaAlayPattern(result.nama);
         var biodata = DB.ResultData
             .AsEnumerable()
-            .FirstOrDefault(b => StringMatching.isMatch(b.nama, regexPattern));
+            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(b.nama)));
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         

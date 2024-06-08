@@ -78,7 +78,6 @@ namespace Tubes3_BesokMinggu
 
         private async void BoyerMooreClick(object sender, RoutedEventArgs e)
         {
-            
             if (string.IsNullOrEmpty(_path))
             {
                 MessageBox.Show("Please select an image first.");
