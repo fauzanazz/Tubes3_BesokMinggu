@@ -13,7 +13,7 @@ namespace Tubes3_BesokMinggu
         public DbSet<Biodata> ResultData { get; set; }
         public string DBPath { get; private set; }
         
-        public DbSet<sidik_jari> sidik_jari { get; set; }
+        public DbSet<SidikJari> sidik_jari { get; set; }
 
         public Database()
         {
@@ -32,7 +32,7 @@ namespace Tubes3_BesokMinggu
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Biodata>().ToTable("biodata");
-            modelBuilder.Entity<sidik_jari>().ToTable("sidik_jari").HasKey(s => new { s.nama, s.berkas_citra });
+            modelBuilder.Entity<SidikJari>().ToTable("sidik_jari").HasKey(s => new { s.nama, s.berkas_citra });
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,7 +53,7 @@ namespace Tubes3_BesokMinggu
                     for (int j = 1; j <= 10; j++)
                     {
                         string namaAlay = StringMatching.toBahasaAlay(namaRandom);
-                        sidik_jari.Add(new sidik_jari
+                        sidik_jari.Add(new SidikJari
                         {
                             nama = namaAlay,
                             berkas_citra = folderPath + "fingerprint (" + (i*10 + j) + ").BMP"

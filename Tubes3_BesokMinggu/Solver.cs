@@ -37,7 +37,7 @@ public static class Solver
         var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
         foreach (var s in DB.sidik_jari)
         {
-            var distance = SolveBoyerMoore(s.berkas_citra, ascii, fullBinary);
+            var distance = CalculateBoyerMooreSimilarity(s.berkas_citra, ascii, fullBinary);
             if (distance == 100)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
@@ -57,7 +57,7 @@ public static class Solver
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new SidikJari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
     }
     
     public static ResultData SolveKMP(string path)
@@ -83,7 +83,7 @@ public static class Solver
         var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
         foreach (var s in DB.sidik_jari)
         {
-            double distance = SolveKMP(s.berkas_citra, ascii, fullBinary);
+            double distance = CalculateKMPSimilarity(s.berkas_citra, ascii, fullBinary);
             if (distance == 100)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
@@ -103,15 +103,15 @@ public static class Solver
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new SidikJari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
 
     }
 
-    private static double SolveKMP(string text, string pattern, string fullPattern)
+    private static double CalculateKMPSimilarity(string text, string pattern, string fullPattern)
     {
         // Load txt file named text
         string texts = System.IO.File.ReadAllText(text.Replace("BMP", "txt"));
-        var number = Algorithm.BoyerMoore(texts, pattern);
+        var number = Algorithm.KMPSearch(texts, pattern);
         
         if (number == -1) // Jika tidak ditemukan
         {
@@ -121,7 +121,7 @@ public static class Solver
         
         return 100;
     }
-    private static double SolveBoyerMoore(string text, string pattern, string fullPattern)
+    private static double CalculateBoyerMooreSimilarity(string text, string pattern, string fullPattern)
     {
         // Load txt file named text
         string texts = System.IO.File.ReadAllText(text.Replace("BMP", "txt"));
@@ -129,12 +129,18 @@ public static class Solver
         
         if (number == -1) // Jika tidak ditemukan
         {
-            int levenshteinDistance = Algorithm.LevenshteinDistance(texts, fullPattern, SIZE);
-            return (SIZE - levenshteinDistance);
+            return CalculateLevenshteinDistance(texts, fullPattern);
         }
         
         return 100;
     }
+
+    private static double CalculateLevenshteinDistance(string texts, string pattern)
+    {
+        int levenshteinDistance = Algorithm.LevenshteinDistance(texts, pattern, SIZE);
+        return (SIZE - levenshteinDistance);
+    }
+    
     public static Bitmap ProcessImage(String path)
     {
         // Load an image from file
@@ -196,12 +202,7 @@ public static class Solver
 
         return newImage;
     }
-    private static Bitmap CropImage(Bitmap image, int x, int y, int width, int height)
-    {
-        Rectangle cropRect = new Rectangle(x, y, width, height);
-        Bitmap croppedImage = image.Clone(cropRect, image.PixelFormat);
-        return croppedImage;
-    }
+    
     private static Bitmap Normalize(Bitmap image)
     {
         BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
@@ -284,15 +285,5 @@ public static class Solver
         }
         string ascii = System.Text.Encoding.ASCII.GetString(binary2);
         return ascii;
-    }
-    public static string BinaryToString(byte[] binary)
-    {
-        string strings = "";
-        foreach (var VARIABLE in binary)
-        {
-            strings += VARIABLE.ToString();
-            strings += " ";
-        }
-        return strings;
     }
 }

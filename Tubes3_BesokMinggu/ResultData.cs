@@ -13,7 +13,7 @@ public class ResultData : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
-    public ResultData(Biodata bio, sidik_jari sidik, int lamaEksekusi, double kecocokan)
+    public ResultData(Biodata bio, SidikJari sidik, int lamaEksekusi, double kecocokan)
     {
         Bio = bio;
         Sidik = sidik;
@@ -35,9 +35,9 @@ public class ResultData : INotifyPropertyChanged
         }
     }
     
-    private sidik_jari _sidik;
+    private SidikJari _sidik;
     
-    public sidik_jari Sidik
+    public SidikJari Sidik
     {
         get { return _sidik; }
         set
