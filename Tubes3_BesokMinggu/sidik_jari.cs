@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tubes3_BesokMinggu;
 
-public class SidikJari : INotifyPropertyChanged
+public class sidik_jari : INotifyPropertyChanged
 {
     [Key]
     private string _berkas_citra;

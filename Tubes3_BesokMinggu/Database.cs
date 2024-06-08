@@ -10,7 +10,7 @@ namespace Tubes3_BesokMinggu
 {
     public sealed class Database : DbContext
     {
-        private List<string> processedBinary;
+        private List<string> files;
         public DbSet<Biodata> ResultData { get; set; }
         public string DBPath { get; private set; }
         
@@ -27,7 +27,7 @@ namespace Tubes3_BesokMinggu
 
             Database.EnsureCreated();
 
-            processedBinary = new List<string>();
+            files = new List<string>();
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,25 +39,39 @@ namespace Tubes3_BesokMinggu
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite($"Data Source={DBPath}");
 
-        public void seedSidikJari(string folderPath)
+        public void refreshSeed(string folderPath)
+        {
+            // get all file inside folderpath
+            files = new List<string>(Directory.GetFiles(folderPath, "*.BMP"));
+            if (files.Count == 0)
+            {
+                Debug.Print("No fingerprint image found in the specified folder path: " + folderPath);
+            }
+            seedSidikJari(folderPath);
+            SaveToTextProcessedSidikJari(folderPath);
+        }
+        
+        private void seedSidikJari(string folderPath)
         {
             // drop all column if exists
             sidik_jari.RemoveRange(sidik_jari);
             SaveChanges();
+            
             try
             {
                 var names = getAllName();
                 Random random = new Random();
-                for (int i =0; i < 600; i++)
+                for (int i =0; i < files.Count; i++)
                 {
                     string namaRandom = names[random.Next(names.Count)];
                     for (int j = 1; j <= 10; j++)
                     {
+                        if (i*10 + j > files.Count) break;
                         string namaAlay = StringMatching.toBahasaAlay(namaRandom);
                         sidik_jari.Add(new sidik_jari
                         {
                             nama = namaAlay,
-                            berkas_citra = folderPath + "fingerprint (" + (i*10 + j) + ").BMP"
+                            berkas_citra = files[i*10 + j - 1]
                         });
                     }
                     SaveChanges();
@@ -72,27 +86,24 @@ namespace Tubes3_BesokMinggu
             Console.WriteLine("Seeding sidik_jari table is done.");
         }
         
-        public void SaveToTextProcessedSidikJari(string path)
+        private void SaveToTextProcessedSidikJari(string path)
         {
-            // if file exists, image already processed
-            if (System.IO.File.Exists(path + "fingerprint (1).txt")) return;
-
-            for (int i = 0; i < 6000; i++)
+            for (int i = 0; i < files.Count; i++)
             {
                 string temp = Solver.BinaryToASCII(
                     Solver.ImageToByteArray(
-                        Solver.ProcessImage(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP"))
+                        Solver.ProcessImage(files[i])
                     )
                 );
                 
                 // if file doesn't exist, create file
-                if (!System.IO.File.Exists(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP")))
+                if (!System.IO.File.Exists(files[i]))
                 {
-                    System.IO.File.Create(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP"));
+                    System.IO.File.Create(files[i]);
                 }
                 
                 // Save to txt file
-                System.IO.File.WriteAllText(Path.Combine(path,"fingerprint (" + (i+1) + ").txt"), temp);
+                System.IO.File.WriteAllText(files[i].Replace("BMP", "txt"), temp);
             }
         }
         

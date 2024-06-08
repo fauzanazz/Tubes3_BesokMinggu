@@ -26,9 +26,7 @@ namespace Tubes3_BesokMinggu
             InitializeComponent();
             this.DataContext = ResultData;
             string currentDirectory = Directory.GetCurrentDirectory();
-            db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
-            
-            db.SaveToTextProcessedSidikJari(Path.Combine(currentDirectory,"Dataset")); // ini buat ngebuat file txt
+            // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)
