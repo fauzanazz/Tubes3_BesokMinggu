@@ -25,7 +25,7 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
-            db.seedBiodata();
+            // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
             string currentDirectory = Directory.GetCurrentDirectory();
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
