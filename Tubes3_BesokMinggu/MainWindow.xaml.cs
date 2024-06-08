@@ -1,10 +1,12 @@
 ﻿using System;
+
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Tubes3_BesokMinggu;
+using Color = System.Windows.Media.Color;
 
 // await using var db = new Database();
 
@@ -27,7 +29,7 @@ namespace Tubes3_BesokMinggu
             InitializeComponent();
             this.DataContext = ResultData;
             
-            
+            // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
         
@@ -63,16 +65,7 @@ namespace Tubes3_BesokMinggu
             
             Dispatcher.Invoke(() =>
             {
-                if (ResultData.Bio == null || ResultData.Kecocokan < 10)
-                {
-                    MessageBox.Show("No match found.");
-                    return;
-                }
-                OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
-                OutputImage.Width = 300;
-                OutputImage.Height = 360;
-                this.DataContext = ResultData;
-                LoadingBar.Visibility = Visibility.Collapsed;
+                HandleResultData(ResultData.Kecocokan);
             });
         }
 
@@ -90,16 +83,7 @@ namespace Tubes3_BesokMinggu
             
             Dispatcher.Invoke(() =>
             {
-                if (ResultData.Bio == null || ResultData.Kecocokan < 10)
-                {
-                    MessageBox.Show("No match found.");
-                    return;
-                }
-                OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
-                OutputImage.Width = 300;
-                OutputImage.Height = 360;
-                DataContext = ResultData;
-                LoadingBar.Visibility = Visibility.Collapsed;
+                HandleResultData(ResultData.Kecocokan);
             });
         }
 
@@ -113,8 +97,88 @@ namespace Tubes3_BesokMinggu
             });
             Dispatcher.Invoke(() =>
             {
+                HandleResultData(ResultData.Kecocokan);
+                string currentDirectory = Directory.GetCurrentDirectory();
                 LoadingBar.Visibility = Visibility.Collapsed;
+                MyImage.Source = new BitmapImage(new Uri(Path.Combine(currentDirectory, "UIAsset", "PlusButton.png"))); // Reset Input Images
+                OutputImage.Source = null; // Reset Output Images
+                DataContext = null;
+                MyImage.Height = 80;
+                MyImage.Width = 80;
+                DataLogging.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Refresh Success");
             });
+        }
+        private Color ConvertHexStringToColor(string hexString)
+        {
+            // Remove '#' if present
+            if (hexString.StartsWith("#"))
+            {
+                hexString = hexString.Substring(1);
+            }
+            hexString = "#" + hexString;
+
+            // Convert hexadecimal string to a Color object
+            return (Color)ColorConverter.ConvertFromString(hexString);
+        }
+
+        private void HandleResultData(double similarity)
+        {
+            if (similarity < 60)
+            {
+                MessageBox.Show("No match found.");
+            }
+            else
+            {
+                OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
+                OutputImage.Width = 300;
+                OutputImage.Height = 360;
+                DataContext = ResultData;
+                SimilarityPercentage.Text = similarity + "%";
+                HandleSimilarityNumber(similarity);
+                DataLogging.Visibility = Visibility.Visible;
+            }
+            LoadingBar.Visibility = Visibility.Collapsed;
+        }
+        
+        // Assume the Similarity never goes < 60
+        private void HandleSimilarityNumber(double similarity)
+        {
+            
+            double lowerBound = 60;
+            
+            double range = 100 - lowerBound;
+
+            // Calculate the position of the similarity within the range
+            double position = (similarity - lowerBound) / range;
+
+            // Define colors
+            Color color;
+
+            // Decide the color based on the position within the range
+            if (position < 0.25) // Red to Yellow
+            {
+                color = ConvertHexStringToColor("#F94444");
+            }
+            else if (position < 0.5) // Yellow to Green
+            {
+                color = ConvertHexStringToColor("#F99B44");
+            }
+            else if (position < 0.75) // Green to Blue
+            {
+                color = ConvertHexStringToColor("#ECE52C");
+            }
+            else if(position < 1)
+            {
+                color = ConvertHexStringToColor("#89F944");
+            }
+            else
+            {
+                color = ConvertHexStringToColor("#44ADF9");
+            }
+            
+            SolidColorBrush brush = new SolidColorBrush(color);
+            SimilarityPercentage.Foreground = brush;
         }
     }
 }
