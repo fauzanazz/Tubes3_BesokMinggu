@@ -25,6 +25,7 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
+            db.seedBiodata();
             string currentDirectory = Directory.GetCurrentDirectory();
             // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
         }
@@ -76,7 +77,7 @@ namespace Tubes3_BesokMinggu
 
             ResultData = Solver.SolveBM(_path);
             
-            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            if (ResultData.Bio == null || ResultData.Kecocokan < 60)
             {
                 MessageBox.Show("No match found.");
                 return;
