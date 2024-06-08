@@ -199,8 +199,8 @@ public static class Algorithm
         t = t.Substring((t.Length/2)-length/2, length);
         
         // Get the length of the two strings
-        int m;
-        int n = m = length;
+        int m = t.Length;
+        int n = s.Length;
 
         // Initialize a 2D array for dynamic programming
         int[,] dp = new int[n + 1, m + 1];

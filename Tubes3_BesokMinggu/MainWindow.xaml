@@ -42,28 +42,17 @@
                 
                 <Grid Grid.Column="2" Margin="10">
                     <StackPanel>
-                        <TextBlock Text="NIK = " />
-                        <TextBlock Text="{Binding Bio.NIK}" />
-                        <TextBlock Text="Nama = " />
-                        <TextBlock Text="{Binding Bio.nama}" />
-                        <TextBlock Text="Tempat Lahir = " />
-                        <TextBlock Text="{Binding Bio.tempat_lahir}" />
-                        <TextBlock Text="Tanggal Lahir = " />
-                        <TextBlock Text="{Binding Bio.tanggal_lahir}" />
-                        <TextBlock Text="Jenis Kelamin = " />
-                        <TextBlock Text="{Binding Bio.jenis_kelamin}" />
-                        <TextBlock Text="Golongan Darah = " />
-                        <TextBlock Text="{Binding Bio.golongan_darah}" />
-                        <TextBlock Text="Alamat = " />
-                        <TextBlock Text="{Binding Bio.alamat}" />
-                        <TextBlock Text="Agama = " />
-                        <TextBlock Text="{Binding Bio.agama}" />
-                        <TextBlock Text="Status Perkawinan = " />
-                        <TextBlock Text="{Binding Bio.status_perkawinan}" />
-                        <TextBlock Text="Pekerjaan = " />
-                        <TextBlock Text="{Binding Bio.pekerjaan}" />
-                        <TextBlock Text="Kewarganegaraan = " />
-                        <TextBlock Text="{Binding Bio.kewarganegaraan}" />
+                        <TextBlock Text="NIK = {Binding Bio.NIK}" />
+                        <TextBlock Text="Nama = {Binding Bio.nama}" />
+                        <TextBlock Text="Tempat Lahir = {Binding Bio.tempat_lahir}" />
+                        <TextBlock Text="Tanggal Lahir = {Binding Bio.tanggal_lahir}" />
+                        <TextBlock Text="Jenis Kelamin = {Binding Bio.jenis_kelamin}" />
+                        <TextBlock Text="Golongan Darah = {Binding Bio.golongan_darah}" />
+                        <TextBlock Text="Alamat = {Binding Bio.alamat}" />
+                        <TextBlock Text="Agama = {Binding Bio.agama}" />
+                        <TextBlock Text="Status Perkawinan = {Binding Bio.status_perkawinan}" />
+                        <TextBlock Text="Pekerjaan = {Binding Bio.pekerjaan}" />
+                        <TextBlock Text="Kewarganegaraan = {Binding Bio.kewarganegaraan}" />
                     </StackPanel>
                 </Grid>
             </Grid>
