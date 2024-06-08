@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,7 +14,7 @@ namespace Tubes3_BesokMinggu
         public DbSet<Biodata> ResultData { get; set; }
         public string DBPath { get; private set; }
         
-        public DbSet<SidikJari> sidik_jari { get; set; }
+        public DbSet<sidik_jari> sidik_jari { get; set; }
 
         public Database()
         {
@@ -32,7 +33,7 @@ namespace Tubes3_BesokMinggu
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Biodata>().ToTable("biodata");
-            modelBuilder.Entity<SidikJari>().ToTable("sidik_jari").HasKey(s => new { s.nama, s.berkas_citra });
+            modelBuilder.Entity<sidik_jari>().ToTable("sidik_jari").HasKey(s => new { s.nama, s.berkas_citra });
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,7 +54,7 @@ namespace Tubes3_BesokMinggu
                     for (int j = 1; j <= 10; j++)
                     {
                         string namaAlay = StringMatching.toBahasaAlay(namaRandom);
-                        sidik_jari.Add(new SidikJari
+                        sidik_jari.Add(new sidik_jari
                         {
                             nama = namaAlay,
                             berkas_citra = folderPath + "fingerprint (" + (i*10 + j) + ").BMP"
@@ -80,18 +81,18 @@ namespace Tubes3_BesokMinggu
             {
                 string temp = Solver.BinaryToASCII(
                     Solver.ImageToByteArray(
-                        Solver.ProcessImage(path + "fingerprint (" + (i+1) + ").BMP")
+                        Solver.ProcessImage(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP"))
                     )
                 );
                 
                 // if file doesn't exist, create file
-                if (!System.IO.File.Exists(path + "fingerprint (" + (i+1) + ").BMP"))
+                if (!System.IO.File.Exists(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP")))
                 {
-                    System.IO.File.Create(path + "fingerprint (" + (i+1) + ").BMP");
+                    System.IO.File.Create(Path.Combine(path,"fingerprint (" + (i+1) + ").BMP"));
                 }
                 
                 // Save to txt file
-                System.IO.File.WriteAllText(path + "fingerprint (" + (i+1) + ").txt", temp);
+                System.IO.File.WriteAllText(Path.Combine(path,"fingerprint (" + (i+1) + ").txt"), temp);
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace Tubes3_BesokMinggu;
 
@@ -13,12 +14,13 @@ public class ResultData : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
-    public ResultData(Biodata bio, SidikJari sidik, int lamaEksekusi, double kecocokan)
+    public ResultData(Biodata bio, sidik_jari sidik, int lamaEksekusi, double kecocokan, string imageOutput)
     {
         Bio = bio;
         Sidik = sidik;
         LamaEksekusi = lamaEksekusi;
         Kecocokan = kecocokan;
+        ImageOutput = imageOutput;
     }
     
     private Biodata _bio;
@@ -35,9 +37,9 @@ public class ResultData : INotifyPropertyChanged
         }
     }
     
-    private SidikJari _sidik;
+    private sidik_jari _sidik;
     
-    public SidikJari Sidik
+    public sidik_jari Sidik
     {
         get { return _sidik; }
         set
@@ -64,11 +66,9 @@ public class ResultData : INotifyPropertyChanged
             }
         }
     }
-    
-    
-    
     private double _kecocokan;
-    
+
+    private string _imageOutput;
     public double Kecocokan
     {
         get { return _kecocokan; }
@@ -80,6 +80,15 @@ public class ResultData : INotifyPropertyChanged
                 _kecocokan = value;
                 OnPropertyChanged(nameof(Kecocokan));
             }
+        }
+    }
+
+    public string ImageOutput
+    {
+        get { return _imageOutput; }
+        private set
+        {
+            _imageOutput = value;
         }
     }
 }
