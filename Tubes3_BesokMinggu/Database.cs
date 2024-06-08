@@ -362,9 +362,9 @@ namespace Tubes3_BesokMinggu
                 var records = ResultData.ToList();
                 
                 // update db collumn name into name_alay
-                foreach (var rec in records)
+                for (int i = 0; i < records.Count; i++)
                 {
-                    rec.nama = StringMatching.toBahasaAlay(rec.nama);
+                    records[i].nama = StringMatching.toBahasaAlay(list_nama[i]);
                 }
                 
                 ResultData.UpdateRange(records);
