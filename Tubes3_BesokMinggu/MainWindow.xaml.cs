@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Tubes3_BesokMinggu;
 
@@ -23,8 +25,10 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
-            // db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
-            db.SaveToTextProcessedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngebuat file txt
+            string currentDirectory = Directory.GetCurrentDirectory();
+            db.seedSidikJari("D:\\VSCODE\\STIMA\\SOCOFing\\Real\\"); // ini buat ngeinsert semua sidik jari ke database
+            
+            db.SaveToTextProcessedSidikJari(Path.Combine(currentDirectory,"Dataset")); // ini buat ngebuat file txt
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -38,12 +42,33 @@ namespace Tubes3_BesokMinggu
             if (openFileDialog.ShowDialog() == true)
             {
                 MyImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                MyImage.Stretch = Stretch.Uniform;
+                
                 _path = openFileDialog.FileName;
             }
 
         }
         
-        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        private void KMPClick(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_path))
+            {
+                MessageBox.Show("Please select an image first.");
+                return;
+            }
+
+            ResultData = Solver.SolveKMP(_path);
+            
+            if (ResultData.Bio == null || ResultData.Kecocokan < 10)
+            {
+                MessageBox.Show("No match found.");
+                return;
+            }
+            OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
+            this.DataContext = ResultData;
+        }
+
+        private void BoyerMooreClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_path))
             {
@@ -58,28 +83,10 @@ namespace Tubes3_BesokMinggu
                 MessageBox.Show("No match found.");
                 return;
             }
-
+            OutputImage.Source = new BitmapImage(new Uri(ResultData.ImageOutput));
             this.DataContext = ResultData;
         }
-        
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            var saveFileDialog = new Microsoft.Win32.SaveFileDialog
-            {
-                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            };
 
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                System.IO.File.WriteAllText(saveFileDialog.FileName, ResultText.Text);
-            }
-        }
-        
-        private void ProcessButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-        
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -35,17 +35,20 @@ public static class Solver
         
         // Find the closest match in the database
         var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
+        var highestsimsimage = ""; // Save Output Image
         foreach (var s in DB.sidik_jari)
         {
             var distance = CalculateBoyerMooreSimilarity(s.berkas_citra, ascii, fullBinary);
             if (distance == 100)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
+                highestsimsimage = s.berkas_citra;
                 break;
             }
             if (distance > result.Distance)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
+                highestsimsimage = s.berkas_citra;
             }
         }
         
@@ -57,7 +60,7 @@ public static class Solver
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, new SidikJari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
     }
     
     public static ResultData SolveKMP(string path)
@@ -81,17 +84,20 @@ public static class Solver
         
         // Find the closest match in the database
         var result = new { nama = "", berkas_citra = "", Distance = 0.0 };
+        var highestsimsimage = ""; // Save Output Image
         foreach (var s in DB.sidik_jari)
         {
             double distance = CalculateKMPSimilarity(s.berkas_citra, ascii, fullBinary);
             if (distance == 100)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
+                highestsimsimage = s.berkas_citra;
                 break;
             }
             if (distance > result.Distance)
             {
                 result = new { s.nama, s.berkas_citra, Distance = distance };
+                highestsimsimage = s.berkas_citra;
             }
         }
         
@@ -103,7 +109,7 @@ public static class Solver
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, new SidikJari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance);
+        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
 
     }
 
