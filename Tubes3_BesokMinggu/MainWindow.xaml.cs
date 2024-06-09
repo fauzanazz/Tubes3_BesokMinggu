@@ -82,13 +82,15 @@ namespace Tubes3_BesokMinggu
             LoadingBar.Visibility = Visibility.Visible;
 
             ResultData = await Task.Run(() => Solver.SolveBM(_path));
-            
+    
             Dispatcher.Invoke(() =>
-            if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
             {
-                HandleResultData(ResultData.Kecocokan);
-                HandleButtonReColor(true, BM);
-                HandleButtonReColor(false, KMP);
+                if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
+                {
+                    HandleResultData(ResultData.Kecocokan);
+                    HandleButtonReColor(true, BM);
+                    HandleButtonReColor(false, KMP);
+                }
             });
         }
 

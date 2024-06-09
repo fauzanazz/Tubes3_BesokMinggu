@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Tubes3_BesokMinggu;
 
 public static class Solver
 {
-    private const int SIZE = 256;
+    private const int SIZE = 64;
     public static Database DB = new Database();
     
     public static ResultData Solve(string path, Func<string, string, string, double> calculateSimilarity)
@@ -30,6 +31,7 @@ public static class Solver
         
         ParallelOptions parallelOptions = new ParallelOptions();
         parallelOptions.MaxDegreeOfParallelism = Environment.ProcessorCount;
+        Debug.Print(Environment.ProcessorCount.ToString());
 
         Parallel.ForEach(DB.sidik_jari, parallelOptions, (s, state) =>
         {
@@ -103,8 +105,7 @@ public static class Solver
     public static Bitmap ProcessImage(String path)
     {
         // Load an image from file
-        // Check if the file exists
-        if (!System.IO.File.Exists(path))
+        if (!System.IO.File.Exists(path))// Check if the file exists
         {
             throw new System.IO.FileNotFoundException("The specified file does not exist.", path);
         }
@@ -118,6 +119,12 @@ public static class Solver
         catch (ArgumentException)
         {
             throw new ArgumentException("The specified file could not be loaded as a Bitmap. Ensure the file is a valid image file.", nameof(path));
+        }
+        
+        // If image is not 90x103, resize it
+        if (image.Width != 96 || image.Height != 103)
+        {
+            image = new ResizeBilinear(SIZE, SIZE).Apply(image);
         }
         
         // Histogram Equalization
