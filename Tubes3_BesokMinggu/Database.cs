@@ -354,6 +354,18 @@ namespace Tubes3_BesokMinggu
             seedSidikJari(folderPath);
             SaveToTextProcessedSidikJari(folderPath);
         }
+
+        public static Biodata decodeBio(Biodata b)
+        {
+            b.NIK = RSA.decoder(b.NIK);
+            b.nama = RSA.decoder(b.nama);
+            b.tempat_lahir = RSA.decoder(b.tempat_lahir);
+            b.tanggal_lahir = RSA.decoder(b.tanggal_lahir);
+            b.alamat = RSA.decoder(b.NIK);
+            b.pekerjaan = RSA.decoder(b.pekerjaan);
+            b.kewarganegaraan = RSA.decoder(b.kewarganegaraan);
+            return b;
+        }
         
         public void seedBiodata()
         {
@@ -365,6 +377,13 @@ namespace Tubes3_BesokMinggu
                 for (int i = 0; i < records.Count; i++)
                 {
                     records[i].nama = StringMatching.toBahasaAlay(list_nama[i]);
+                    records[i].NIK = RSA.encoder(records[i].NIK);
+                    records[i].nama = RSA.encoder(records[i].nama);
+                    records[i].tempat_lahir = RSA.encoder(records[i].tempat_lahir);
+                    records[i].tanggal_lahir = RSA.encoder(records[i].tanggal_lahir);
+                    records[i].alamat = RSA.encoder(records[i].alamat);
+                    records[i].pekerjaan = RSA.encoder(records[i].pekerjaan);
+                    records[i].kewarganegaraan = RSA.encoder(records[i].kewarganegaraan);
                 }
                 
                 ResultData.UpdateRange(records);

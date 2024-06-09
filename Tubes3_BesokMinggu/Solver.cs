@@ -55,11 +55,11 @@ public static class Solver
         // Find the biodata in the database based on the name
         var biodata = DB.ResultData
             .AsEnumerable()
-            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(b.nama)));
+            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(RSA.decoder(b.nama))));
         
         long end = DateTime.Now.Ticks; // Calculate the time taken
         
-        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
+        return new ResultData(Database.decodeBio(biodata), new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
     }
     
     public static ResultData SolveKMP(string path)

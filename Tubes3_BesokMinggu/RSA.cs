@@ -11,9 +11,17 @@ public class RSA
 
     public RSA()
     {
-        N = getN();
-        E = getE();
-        D = getD();
+        // use this to get dynamic key
+        // N = getN();
+        // E = getE();
+        // D = getD();
+        
+        // use this to get static key
+        P = 203659;
+        Q = 493159;
+        N = 100436268781;
+        E = 5;
+        D = 20087114393;
     }
     
     // public key
@@ -86,12 +94,20 @@ public class RSA
     
     
     // private key
-    private static int K = 2;
+    private static int K = 1;
     private static long D;
 
 
     private static long getD()
     {
+        // TODO: coba bikin pake ini
+        while (true)
+        {
+            long phi = phiN();
+            long temp = 1 + (K * phi);
+            if (temp % E == 0) return temp/E;
+            K++;
+        }
         return (long) ModInverse(E, phiN());
     }
     
@@ -113,7 +129,7 @@ public class RSA
             res += encrypt((int)b) + ":";
         }
         
-        return res;
+        return res.Remove(res.Length-1);
     }
 
     private static long encrypt(int text)

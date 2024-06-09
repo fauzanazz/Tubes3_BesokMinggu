@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -26,25 +27,33 @@ namespace Tubes3_BesokMinggu
         {
             InitializeComponent();
             this.DataContext = ResultData;
+            RSA rsa = new RSA(); // This must be initialized first
             
             // test RSA
-            RSA rsa = new RSA();
-            string temp = RSA.encoder("Test Message");
-            string res = RSA.decoder(temp);
-            temp = RSA.encoder("5169441504764349");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("dRj lAK5MiWATi");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("Probolinggo");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("1984-10-03");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("Gg. Siliwangi No. 0");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("Airline pilot");
-            res = RSA.decoder(temp);
-            temp = RSA.encoder("Indonesia");
-            res = RSA.decoder(temp);
+            // string temp = RSA.encoder("Test Message");
+            // string res = RSA.decoder(temp);
+            // if ("Test Message" != res){Debug.Print(res);}
+            // temp = RSA.encoder("5169441504764349");
+            // res = RSA.decoder(temp);
+            // if ("5169441504764349" != res){Debug.Print(res);}
+            // temp = RSA.encoder("dRj lAK5MiWATi");
+            // res = RSA.decoder(temp);
+            // if ("dRj lAK5MiWATi" != res){Debug.Print(res);}
+            // temp = RSA.encoder("Probolinggo");
+            // res = RSA.decoder(temp);
+            // if ("Probolinggo" != res){Debug.Print(res);}
+            // temp = RSA.encoder("1984-10-03");
+            // res = RSA.decoder(temp);
+            // if ("1984-10-03" != res){Debug.Print(res);}
+            // temp = RSA.encoder("Gg. Siliwangi No. 0");
+            // res = RSA.decoder(temp);
+            // if ("Gg. Siliwangi No. 0" != res){Debug.Print(res);}
+            // temp = RSA.encoder("Airline pilot");
+            // res = RSA.decoder(temp);
+            // if ("Airline pilot" != res){Debug.Print(res);}
+            // temp = RSA.encoder("Indonesia");
+            // res = RSA.decoder(temp);
+            // if ("Indonesia" != res){Debug.Print(res);}
             
             
             // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
