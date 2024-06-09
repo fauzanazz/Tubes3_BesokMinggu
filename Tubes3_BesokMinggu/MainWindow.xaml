@@ -1,0 +1,176 @@
+﻿<Window x:Class="Tubes3_BesokMinggu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tubes3_BesokMinggu"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1024">
+        <Grid >
+                
+                <StackPanel>
+                        <StackPanel.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1.5,1.5" SpreadMethod="Reflect">
+                                        <GradientStop Color="#1D1D1D" Offset="0"/>
+                                        <GradientStop Color="#373737" Offset="1"/>
+                                </LinearGradientBrush>
+                        </StackPanel.Background>
+                        <Grid  VerticalAlignment="Top">
+                                <Grid.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Reflect">
+                                                <GradientStop Color="#1D1D1D" Offset="0"/>
+                                                <GradientStop Color="#373737" Offset="1"/>
+                                        </LinearGradientBrush>
+                                </Grid.Background>
+                                <TextBlock FontFamily="Inter" FontSize="48" Padding="0 ,10 0 10" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Azure">
+                                        <Bold>Fingerprint Scanner</Bold>
+                                </TextBlock>
+
+                                <Button HorizontalAlignment="Right" Margin="15" VerticalAlignment="Center" Background="Transparent" Click="RefreshClick" BorderThickness="0">
+                                        <Image Source="/UIAsset/RefreshButton.png" Width="70" Height="70"></Image>
+                                </Button>
+                        </Grid>
+                        <StackPanel Name="DataLogging" HorizontalAlignment="Stretch" Margin="0 10 0 0 " Visibility="Collapsed">
+                                <TextBlock HorizontalAlignment="Center" FontSize="48" FontFamily="Inter" >
+                                        <Bold><TextBlock Name="SimilarityPercentage"/></Bold>
+                                </TextBlock>
+                                <Label Foreground="#F5F5F5" HorizontalAlignment="Center" FontWeight="Medium" FontSize="20" Name="TimeExecution">
+                                        <TextBlock>
+                                                <Run Text="Process Done in "/>
+                                                <Run Text="{Binding LamaEksekusi}"/> <!-- Assuming you bind to a property called ProcessTime -->
+                                                <Run Text=" ms"/>
+                                        </TextBlock>
+                                </Label>
+                        </StackPanel>
+                        
+                        <StackPanel HorizontalAlignment="Stretch" Height="400">
+                                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="333"/>
+                                                <ColumnDefinition Width="333"/>
+                                                <ColumnDefinition Width="333"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Background="#BEBEBE" Grid.Row="0" Grid.Column="0" Width="300" Height="370" Click="ImageButton_Click" BorderThickness="0">
+                                                <Button.Resources>
+                                                        <Style TargetType="Border">
+                                                                <Setter Property="CornerRadius" Value="8"/>
+                                                        </Style>
+                                                </Button.Resources>
+                                                <Image Name="MyImage" Source="/UIAsset/PlusButton.png" Width="80" Height="80"/>
+                                        </Button>
+                                        <StackPanel Grid.Column="1" Margin="15 60.5" >
+                                                <StackPanel.Resources>
+                                                        <Style TargetType="TextBlock">
+                                                                <!-- Set FontSize to 16 -->
+                                                                <Setter Property="FontSize" Value="16"/>
+                                                                <!-- Set Padding for each TextBlock -->
+                                                                <Setter Property="Padding" Value="1.5"/>
+                                                                <Setter Property="FontWeight" Value="Medium"></Setter>
+                                                                <Setter Property="FontFamily" Value="Inter"></Setter>
+                                                        </Style>
+                                                </StackPanel.Resources>
+                                                <TextBlock.Foreground>White</TextBlock.Foreground>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="NIK = " />
+                                                        <TextBlock Text="{Binding Bio.NIK}" />        
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Nama = " />
+                                                        <TextBlock Text="{Binding Sidik.nama}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Tempat Lahir = " />
+                                                        <TextBlock Text="{Binding Bio.tempat_lahir}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Tanggal Lahir = " />
+                                                        <TextBlock Text="{Binding Bio.tanggal_lahir}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Jenis Kelamin = " />
+                                                        <TextBlock Text="{Binding Bio.jenis_kelamin}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Golongan Darah = " />
+                                                        <TextBlock Text="{Binding Bio.golongan_darah}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Alamat = " />
+                                                        <TextBlock Text="{Binding Bio.alamat}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Agama = " />
+                                                        <TextBlock Text="{Binding Bio.agama}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Status Perkawinan = " />
+                                                        <TextBlock Text="{Binding Bio.status_perkawinan}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Pekerjaan = " />
+                                                        <TextBlock Text="{Binding Bio.pekerjaan}" />
+                                                </StackPanel>
+                                                
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Kewarganegaraan = " />
+                                                        <TextBlock Text="{Binding Bio.kewarganegaraan}" />
+                                                </StackPanel>
+                                                <GridSplitter Height="25"></GridSplitter>
+                                                
+                                        </StackPanel>
+                                        <Label Background="#BEBEBE" Grid.Row="0" Grid.Column="2" Width="300" Height="370" BorderThickness="0">
+                                                <Label.Resources>
+                                                        <Style TargetType="Border">
+                                                                <Setter Property="CornerRadius" Value="8"/>
+                                                        </Style>
+                                                </Label.Resources>
+                                                <Image Name="OutputImage" Width="80" Height="80"/>
+                                        </Label>
+                                </Grid>
+                        </StackPanel>
+                        <GridSplitter Height="10"></GridSplitter>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock.FontSize>16</TextBlock.FontSize>
+                                <TextBlock.FontWeight>Medium</TextBlock.FontWeight>
+                                
+                                <Button Width="120" Height="45" Click="BoyerMooreClick" BorderThickness="0" Name="BM">
+                                        <Button.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Reflect">
+                                                        <GradientStop Color="#F5F5F5" Offset="0"/>
+                                                        <GradientStop Color="#878787" Offset="1"/>
+                                                </LinearGradientBrush>
+                                        </Button.Background>
+                                        <Button.Resources>
+                                                <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                </Style>
+                                        </Button.Resources>
+                                        <TextBlock  Text="Boyer Moore"></TextBlock>
+                                </Button>
+                                <GridSplitter Width="30" Background="Transparent"></GridSplitter>
+                                <Button  Width="120" Height="45" Click="KMPClick" BorderThickness="0" Name="KMP" >
+                                        <Button.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Reflect">
+                                                        <GradientStop Color="#F5F5F5" Offset="0"/>
+                                                        <GradientStop Color="#878787" Offset="1"/>
+                                                </LinearGradientBrush>
+                                        </Button.Background>
+                                        <Button.Resources>
+                                                <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                </Style>
+                                        </Button.Resources>
+                                        <TextBlock  Text="KMP"></TextBlock>
+                                </Button>
+                        </StackPanel>
+                </StackPanel>
+                <Grid Name="LoadingBar" Background="#90000000" Visibility="Collapsed">
+                     
+                        <local:LoadingSpinner x:Name="LoadingSpinner" Height="120"  HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" />        
+                </Grid>
+        </Grid>
+</Window>
