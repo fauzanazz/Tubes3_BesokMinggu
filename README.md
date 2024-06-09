@@ -63,11 +63,11 @@
   Buat folder Dataset dan isikan keseluruhan image yang ada disana, Image pada dataset haruslah berbentuk BMP (Penting!!! )
 2. Download Dotnet 6.0 Desktop Runtime <br>
   https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.31-windows-x64-installer?cid=getdotnetcore
-  
-3. Download Executable <br>
-  Jika Executable yang di unduh, maka buka aplikasi folder yang di unduh. Jalankan Aplikasi executable yang ada. Masukkan Dataset pada folder Dataset, lalu pencet tombol refresh untuk membuat database sidik jari. Setelah loading selesai, pencet tombol (+) yang ada di kiri tengah. Masukkan sidik jari yang ingin dicari, lalu pilih algoritma yang ingin digunakan untuk mencari.
-4. Source code <br>
-  Jika Source code yang di unduh, maka buka project sln menggunakan IDE yang Visual Studio atau Rider. Lakukan build / compile. Masukkan Dataset pada folder Dataset, lalu pencet tombol refresh untuk membuat database sidik jari. Setelah loading selesai, pencet tombol (+) yang ada di kiri tengah. Masukkan sidik jari yang ingin dicari, lalu pilih algoritma yang ingin digunakan untuk mencari.
+3. Source code <br>
+   Lakukan Build Solution pada salah satu IDE (bebas) dapat pada RIDER ataupun Visual Studio
+4. Download Executable <br>
+  Jalankan Executable yang terbuat pada directory Tubes3_BesokMinggu/bin/Debug/net6.0-windows/Tubes3_BesokMinggu.exe 
+5. Aplikasi Siap Dijalankan
 
 ## Project Status
 Project is: _completed_
