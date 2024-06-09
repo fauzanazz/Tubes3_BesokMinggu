@@ -28,6 +28,7 @@ namespace Tubes3_BesokMinggu
             this.DataContext = ResultData;
             
             // test RSA
+            RSA rsa = new RSA();
             string temp = RSA.encoder("Test Message");
             string res = RSA.decoder(temp);
             temp = RSA.encoder("5169441504764349");
