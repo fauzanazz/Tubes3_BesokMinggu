@@ -383,11 +383,11 @@ namespace Tubes3_BesokMinggu
                 {
                     records[i].nama = StringMatching.toBahasaAlay(list_nama[i]);
                     records[i].nama = RSA.encoder(records[i].nama);
-                    records[i].tempat_lahir = RSA.encoder(records[i].tempat_lahir);
-                    records[i].tanggal_lahir = RSA.encoder(records[i].tanggal_lahir);
-                    records[i].alamat = RSA.encoder(records[i].alamat);
-                    records[i].pekerjaan = RSA.encoder(records[i].pekerjaan);
-                    records[i].kewarganegaraan = RSA.encoder(records[i].kewarganegaraan);
+                    // records[i].tempat_lahir = RSA.encoder(records[i].tempat_lahir);
+                    // records[i].tanggal_lahir = RSA.encoder(records[i].tanggal_lahir);
+                    // records[i].alamat = RSA.encoder(records[i].alamat);
+                    // records[i].pekerjaan = RSA.encoder(records[i].pekerjaan);
+                    // records[i].kewarganegaraan = RSA.encoder(records[i].kewarganegaraan);
                 }
                 
                 ResultData.UpdateRange(records);
@@ -411,11 +411,10 @@ namespace Tubes3_BesokMinggu
             
             try
             {
-                var names = getAllName();
                 Random random = new Random();
                 for (int i =0; i < files.Count; i++)
                 {
-                    string namaRandom = names[random.Next(names.Count)];
+                    string namaRandom = list_nama[random.Next(list_nama.Count)];
                     for (int j = 1; j <= 10; j++)
                     {
                         if (i*10 + j > files.Count) break;
@@ -459,7 +458,7 @@ namespace Tubes3_BesokMinggu
             }
         }
         
-        private List<string> getAllName()
+        public List<string> getAllName()
         {
             return ResultData.Select(x => x.nama).ToList();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -85,12 +86,9 @@ namespace Tubes3_BesokMinggu
     
             Dispatcher.Invoke(() =>
             {
-                if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
-                {
-                    HandleResultData(ResultData.Kecocokan);
-                    HandleButtonReColor(true, BM);
-                    HandleButtonReColor(false, KMP);
-                }
+                HandleResultData(ResultData.Kecocokan);
+                HandleButtonReColor(true, BM);
+                HandleButtonReColor(false, KMP);
             });
         }
 
@@ -140,7 +138,6 @@ namespace Tubes3_BesokMinggu
             });
             Dispatcher.Invoke(() =>
             {
-                HandleResultData(ResultData.Kecocokan);
                 string currentDirectory = Directory.GetCurrentDirectory();
                 LoadingBar.Visibility = Visibility.Collapsed;
                 MyImage.Source = new BitmapImage(new Uri(Path.Combine(currentDirectory, "UIAsset", "PlusButton.png"))); // Reset Input Images

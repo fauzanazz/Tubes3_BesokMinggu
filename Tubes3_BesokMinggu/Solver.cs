@@ -43,7 +43,7 @@ public static class Solver
                     result = new { s.nama, s.berkas_citra, Distance = distance };
                     highestsimsimage = s.berkas_citra;
                 }
-                
+
                 if (distance == 100)
                 {
                     stop = true;

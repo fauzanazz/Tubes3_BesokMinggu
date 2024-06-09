@@ -149,17 +149,14 @@ public class StringMatching
     
     private static string getBahasaSingkatPattern(string text){
         
-        string pattern = "";
+        string pattern = "a*i*u*e*o*";
         List<char> hurufVokal = new List<char> { 'a', 'i', 'u', 'e', 'o' };
 
         for (int i = 0; i < text.Length - 1; i++)
         {
-            if (!hurufVokal.Contains(text[i]) && !hurufVokal.Contains(text[i + 1]))
-                pattern += text[i] + "a*i*u*e*o*";
-            else 
-                pattern += text[i];
+            pattern += text[i] + "a*i*u*e*o*";
         }
-        pattern += text[text.Length - 1];
+        pattern += text[text.Length - 1] + "a*i*u*e*o*";
         return pattern;
     }
     

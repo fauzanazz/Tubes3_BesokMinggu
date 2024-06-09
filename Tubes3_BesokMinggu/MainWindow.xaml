@@ -77,7 +77,7 @@
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="Nama = " />
-                                                        <TextBlock Text="{Binding Bio.nama}" />
+                                                        <TextBlock Text="{Binding Sidik.nama}" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="Tempat Lahir = " />
