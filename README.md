@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-<h1 align="center">IF2211 Strategi Algoritma</h1>
+<h1 align="center">Besok Minggu</h1>
 
 <div align="center">
   <img src="src/Tubes3_BesokMinggu/Screenshots/messageImage_1717949743365.jpg" alt="mediQ Logo" />
@@ -9,7 +9,7 @@
 <div align="center">
 
 <p align="center">
-    Tugas Besar 2: Pemanfaatan Pattern Matching dalam Membangun Sistem Deteksi Individu Berbasis
+    Tugas Besar 3: Pemanfaatan Pattern Matching dalam Membangun Sistem Deteksi Individu Berbasis
  Biometrik Melalui Citra Sidik Jari
     <br />
     <a href="https://github.com/ValentinoTriadi/Tubes2_OOP"><strong>Explore the docs »</strong></a>
