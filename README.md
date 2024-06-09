@@ -69,7 +69,7 @@ Setelah mendapat kan similarity tertinggi, didapat nama dari pemilik sidik jari 
 3. Source code <br>
    Lakukan Build Solution pada salah satu IDE (bebas) dapat pada RIDER ataupun Visual Studio
 4. Download Executable <br>
-  Jalankan Executable yang terbuat pada directory Tubes3_BesokMinggu/bin/Debug/net6.0-windows/Tubes3_BesokMinggu.exe 
+  Jalankan Executable yang terbuat pada directory src/Tubes3_BesokMinggu/bin/Debug/net6.0-windows/Tubes3_BesokMinggu.exe 
 5. Aplikasi Siap Dijalankan
 
 ## Project Status
