@@ -1,15 +1,14 @@
 <a name="readme-top"></a>
+<h1 align="center">IF2211 Strategi Algoritma</h1>
+
 <div align="center">
-  <img src="img/logo.png" alt="mediQ Logo" />
+  <img src="Tubes3_BesokMinggu/Screenshots/messageImage_1717949743365.jpg" alt="mediQ Logo" />
 </div>
 
 <br />
 <div align="center">
 
-<h3 align="center">
-IF2211 Strategi Algoritma</h3>
-
-  <p align="center">
+<p align="center">
     Tugas Besar 2: Pemanfaatan Pattern Matching dalam Membangun Sistem Deteksi Individu Berbasis
  Biometrik Melalui Citra Sidik Jari
     <br />
@@ -59,16 +58,6 @@ IF2211 Strategi Algoritma</h3>
 - [x] BoyerMoore Button : Do pattern matching using BoyerMoore technique
 - [x] KMP Button : Do pattern matching using KMP technique
 
-## Screenshots
-### Main Menu
-![Example screenshot](/img/MainMenu.png)
-
-### Game Screen
-![Example screenshot](/img/InGame1.png)
-![Example screenshot](/img/InGame2.png)
-![Example screenshot](/img/InGame3.png)
-
-
 ## Setup
 
 1. Download Executable
@@ -82,12 +71,18 @@ Project is: _completed_
 
 
 ## Acknowledgements
-- This project was made as a Strategy Algoritma in Institute Technology Bandung
-
-
-## Contact
-Created by : 
 - [Muhammad Fauzan Azhim - 13522153](https://github.com/fauzanazz)
+<div align="center">
+  <img src="Tubes3_BesokMinggu/Screenshots/Frame51.png" alt="mediQ Logo" />
+</div>
+
 - [Muhammad Davis Adhipramana - 13522157](https://github.com/Loxenary)
+<div align="center">
+  <img src="Tubes3_BesokMinggu/Screenshots/Frame53.png" alt="mediQ Logo" />
+</div>
+
 - [Valentino Chryslie Triadi - 13522164](https://github.com/ValentinoTriadi)
+<div align="center">
+  <img src="Tubes3_BesokMinggu/Screenshots/Frame52.png" alt="mediQ Logo" />
+</div>
 
