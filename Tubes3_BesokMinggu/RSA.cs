@@ -17,8 +17,8 @@ public class RSA
     }
     
     // public key
-    public static int P, Q;
-    public static long N;
+    private static int P, Q;
+    private static long N;
     public static int E;
     
     private static long getN()
@@ -92,14 +92,14 @@ public class RSA
 
     private static long getD()
     {
-        return ((K * phiN()) + 1) / E;
-        // long phi = phiN();
-        // for (int i = 2; i < phi; i++)
-        // {
-        //     if ((i * E) % phi == 1) return i;
-        // }
-
-        return -1;
+        return (long) ModInverse(E, phiN());
+    }
+    
+    public static BigInteger ModInverse(BigInteger a, BigInteger m)
+    {
+        if (m.IsZero) throw new DivideByZeroException("Modulus cannot be 0.");
+        if (m == 1) return 0;
+        return BigInteger.ModPow(a, m - 2, m);
     }
     
     // encrypt
@@ -118,8 +118,8 @@ public class RSA
 
     private static long encrypt(int text)
     {
-        BigInteger encrypted = BigInteger.ModPow(text, E, N);
-        return (long) encrypted;
+        long encrypted = (long) BigInteger.ModPow(text, E, N);
+        return encrypted;
     }
 
     // decrypt
@@ -134,9 +134,9 @@ public class RSA
         return res;
     }
     
-    private static int decrypt(long text)
+    private static long decrypt(long text)
     {
-        BigInteger decrypted = BigInteger.ModPow(text, D, N);
-        return (int) decrypted;
+        long decrypted = (long) BigInteger.ModPow(text, D, N);
+        return decrypted;
     }
 }
