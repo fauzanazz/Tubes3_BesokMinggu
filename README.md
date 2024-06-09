@@ -59,10 +59,10 @@
 - [x] KMP Button : Do pattern matching using KMP technique
 
 ## Setup
-
-1. Download Executable
+1. (!!! Penting) Tambahkan Folder Dataset Terlebih Dahulu pada Directory Tubes3_BesokMinggu
+  Buat folder Dataset dan isikan keseluruhan image yang ada disana, Image pada dataset haruslah berbentuk BMP
+2. Download Executable
   Jika Executable yang di unduh, maka buka aplikasi folder yang di unduh. Jalankan Aplikasi executable yang ada. Masukkan Dataset pada folder Dataset, lalu pencet tombol refresh untuk membuat database sidik jari. Setelah loading selesai, pencet tombol (+) yang ada di kiri tengah. Masukkan sidik jari yang ingin dicari, lalu pilih algoritma yang ingin digunakan untuk mencari.
-
 3. Source code
   Jika Source code yang di unduh, maka buka project sln menggunakan IDE yang Visual Studio atau Rider. Lakukan build / compile. Masukkan Dataset pada folder Dataset, lalu pencet tombol refresh untuk membuat database sidik jari. Setelah loading selesai, pencet tombol (+) yang ada di kiri tengah. Masukkan sidik jari yang ingin dicari, lalu pilih algoritma yang ingin digunakan untuk mencari.
 
