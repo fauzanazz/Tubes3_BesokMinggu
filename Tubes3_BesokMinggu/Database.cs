@@ -357,14 +357,19 @@ namespace Tubes3_BesokMinggu
 
         public static Biodata decodeBio(Biodata b)
         {
-            b.NIK = RSA.decoder(b.NIK);
-            b.nama = RSA.decoder(b.nama);
-            b.tempat_lahir = RSA.decoder(b.tempat_lahir);
-            b.tanggal_lahir = RSA.decoder(b.tanggal_lahir);
-            b.alamat = RSA.decoder(b.NIK);
-            b.pekerjaan = RSA.decoder(b.pekerjaan);
-            b.kewarganegaraan = RSA.decoder(b.kewarganegaraan);
-            return b;
+            Biodata newBio = new Biodata();
+            newBio.NIK = b.NIK;
+            newBio.nama = RSA.decoder(b.nama);
+            newBio.tempat_lahir = RSA.decoder(b.tempat_lahir);
+            newBio.tanggal_lahir = RSA.decoder(b.tanggal_lahir);
+            newBio.jenis_kelamin = b.jenis_kelamin;
+            newBio.golongan_darah = b.golongan_darah;
+            newBio.alamat = RSA.decoder(b.alamat);
+            newBio.agama = b.agama;
+            newBio.status_perkawinan = b.status_perkawinan;
+            newBio.pekerjaan = RSA.decoder(b.pekerjaan);
+            newBio.kewarganegaraan = RSA.decoder(b.kewarganegaraan);
+            return newBio;
         }
         
         public void seedBiodata()
@@ -377,7 +382,7 @@ namespace Tubes3_BesokMinggu
                 for (int i = 0; i < records.Count; i++)
                 {
                     records[i].nama = StringMatching.toBahasaAlay(list_nama[i]);
-                    records[i].NIK = RSA.encoder(records[i].NIK);
+                    // records[i].NIK = RSA.encoder(records[i].NIK);
                     records[i].nama = RSA.encoder(records[i].nama);
                     records[i].tempat_lahir = RSA.encoder(records[i].tempat_lahir);
                     records[i].tanggal_lahir = RSA.encoder(records[i].tanggal_lahir);

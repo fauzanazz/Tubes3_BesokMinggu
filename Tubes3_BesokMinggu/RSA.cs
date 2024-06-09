@@ -100,7 +100,6 @@ public class RSA
 
     private static long getD()
     {
-        // TODO: coba bikin pake ini
         while (true)
         {
             long phi = phiN();
@@ -108,7 +107,6 @@ public class RSA
             if (temp % E == 0) return temp/E;
             K++;
         }
-        return (long) ModInverse(E, phiN());
     }
     
     public static BigInteger ModInverse(BigInteger a, BigInteger m)
