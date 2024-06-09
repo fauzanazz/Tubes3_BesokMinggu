@@ -2,7 +2,7 @@
 <h1 align="center">IF2211 Strategi Algoritma</h1>
 
 <div align="center">
-  <img src="Tubes3_BesokMinggu/Screenshots/messageImage_1717949743365.jpg" alt="mediQ Logo" />
+  <img src="src/Tubes3_BesokMinggu/Screenshots/messageImage_1717949743365.jpg" alt="mediQ Logo" />
 </div>
 
 <br />
@@ -79,16 +79,16 @@ Project is: _completed_
 ## Acknowledgements
 - [Muhammad Fauzan Azhim - 13522153](https://github.com/fauzanazz)
 <div align="center">
-  <img src="Tubes3_BesokMinggu/Screenshots/Frame51.png" alt="mediQ Logo" />
+  <img src="src/Tubes3_BesokMinggu/Screenshots/Frame51.png" alt="mediQ Logo" />
 </div>
 
 - [Muhammad Davis Adhipramana - 13522157](https://github.com/Loxenary)
 <div align="center">
-  <img src="Tubes3_BesokMinggu/Screenshots/Frame53.png" alt="mediQ Logo" />
+  <img src="src/Tubes3_BesokMinggu/Screenshots/Frame53.png" alt="mediQ Logo" />
 </div>
 
 - [Valentino Chryslie Triadi - 13522164](https://github.com/ValentinoTriadi)
 <div align="center">
-  <img src="Tubes3_BesokMinggu/Screenshots/Frame52.png" alt="mediQ Logo" />
+  <img src="src/Tubes3_BesokMinggu/Screenshots/Frame52.png" alt="mediQ Logo" />
 </div>
 
