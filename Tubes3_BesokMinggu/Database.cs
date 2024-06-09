@@ -382,7 +382,6 @@ namespace Tubes3_BesokMinggu
                 for (int i = 0; i < records.Count; i++)
                 {
                     records[i].nama = StringMatching.toBahasaAlay(list_nama[i]);
-                    // records[i].NIK = RSA.encoder(records[i].NIK);
                     records[i].nama = RSA.encoder(records[i].nama);
                     records[i].tempat_lahir = RSA.encoder(records[i].tempat_lahir);
                     records[i].tanggal_lahir = RSA.encoder(records[i].tanggal_lahir);

@@ -31,7 +31,6 @@ public static class Solver
         
         ParallelOptions parallelOptions = new ParallelOptions();
         parallelOptions.MaxDegreeOfParallelism = Environment.ProcessorCount;
-        Debug.Print(Environment.ProcessorCount.ToString());
 
         Parallel.ForEach(DB.sidik_jari, parallelOptions, (s, state) =>
         {
@@ -44,6 +43,7 @@ public static class Solver
                     result = new { s.nama, s.berkas_citra, Distance = distance };
                     highestsimsimage = s.berkas_citra;
                 }
+                
                 if (distance == 100)
                 {
                     stop = true;
@@ -54,17 +54,15 @@ public static class Solver
 
         var biodata = DB.ResultData
             .AsEnumerable()
-            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(b.nama)));
+            .FirstOrDefault(b => StringMatching.isMatch(result.nama, StringMatching.getBahasaAlayPattern(RSA.decoder(b.nama))));
 
         long end = DateTime.Now.Ticks;
-        return new ResultData(biodata, new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
+        return new ResultData(Database.decodeBio(biodata), new sidik_jari(){nama = result.nama, berkas_citra = result.berkas_citra}, (int)((end - start) / TimeSpan.TicksPerMillisecond), result.Distance, highestsimsimage);
     }
-
     public static ResultData SolveBM(string path)
     {
         return Solve(path, CalculateBoyerMooreSimilarity);
     }
-
     public static ResultData SolveKMP(string path)
     {
         return Solve(path, CalculateKMPSimilarity);
@@ -95,11 +93,10 @@ public static class Solver
         
         return 100;
     }
-
     private static double CalculateLevenshteinDistance(string texts, string pattern)
     {
         int levenshteinDistance = Algorithm.LevenshteinDistance(texts, pattern, SIZE);
-        return (double)(SIZE - levenshteinDistance) / SIZE;
+        return ((double)(SIZE - levenshteinDistance) / SIZE) * 100;
     }
     
     public static Bitmap ProcessImage(String path)
@@ -168,7 +165,6 @@ public static class Solver
 
         return newImage;
     }
-    
     private static Bitmap Normalize(Bitmap image)
     {
         BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, image.PixelFormat);

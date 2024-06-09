@@ -19,7 +19,7 @@ namespace Tubes3_BesokMinggu
     public partial class MainWindow
     {
         
-        private int TRESHOLD = 60;
+        private int TRESHOLD = 50;
         private Database db = new Database(); // Temporary aja karena tidak tau gmn benerin db yg atas
         public Biodata Biodata { get; set; }
         private string _path;
