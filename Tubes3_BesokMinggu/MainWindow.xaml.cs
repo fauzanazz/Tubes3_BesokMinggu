@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +19,7 @@ namespace Tubes3_BesokMinggu
     public partial class MainWindow
     {
         
+        private int TRESHOLD = 60;
         private Database db = new Database(); // Temporary aja karena tidak tau gmn benerin db yg atas
         public Biodata Biodata { get; set; }
         private string _path;
@@ -28,8 +29,8 @@ namespace Tubes3_BesokMinggu
         public MainWindow()
         {
             InitializeComponent();
-            // db.seedBiodata(); // WARNING: Jangan di uncomment kecuali mau ngeinsert semua biodata ke database ulang
-            // db.refreshSeed(Path.Combine(currentDirectory,"Dataset")); // ini buat ngeinsert semua sidik jari ke database
+            this.DataContext = ResultData;
+            RSA rsa = new RSA();
         }
         
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -83,6 +84,7 @@ namespace Tubes3_BesokMinggu
             ResultData = await Task.Run(() => Solver.SolveBM(_path));
             
             Dispatcher.Invoke(() =>
+            if (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD)
             {
                 HandleResultData(ResultData.Kecocokan);
                 HandleButtonReColor(true, BM);
@@ -93,7 +95,8 @@ namespace Tubes3_BesokMinggu
         private void HandleButtonReColor(bool isActive, object button)
         {
             
-            if (isActive)
+
+            if (isActive && (ResultData.Bio == null || ResultData.Kecocokan < TRESHOLD))
             {
                 LinearGradientBrush gradientBrush = new LinearGradientBrush
                 {
