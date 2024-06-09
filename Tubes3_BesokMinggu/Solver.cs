@@ -11,7 +11,7 @@ namespace Tubes3_BesokMinggu;
 
 public static class Solver
 {
-    private const int SIZE = 64;
+    private const int SIZE = 128;
     public static Database DB = new Database();
     
     public static ResultData Solve(string path, Func<string, string, string, double> calculateSimilarity)
