@@ -1614,19 +1614,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\acer\\.nuget\\packages\\": {}
+    "C:\\Users\\mfauz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VSCODE\\STIMA\\Tubes3\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+      "projectUniqueName": "E:\\Code\\Csharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
       "projectName": "Tubes3_BesokMinggu",
-      "projectPath": "D:\\VSCODE\\STIMA\\Tubes3\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
-      "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-      "outputPath": "D:\\VSCODE\\STIMA\\Tubes3\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
+      "projectPath": "E:\\Code\\Csharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu.csproj",
+      "packagesPath": "C:\\Users\\mfauz\\.nuget\\packages\\",
+      "outputPath": "E:\\Code\\Csharp\\Tubes3_BesokMinggu\\Tubes3_BesokMinggu\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mfauz\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0-windows"
@@ -1694,7 +1694,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\acer\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\mfauz\\.dotnet\\sdk\\6.0.418\\RuntimeIdentifierGraph.json"
       }
     }
   },
